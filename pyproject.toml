@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "specforge-ai"
+version = "0.1.0"
+description = "A diagnostic layer that classifies software requirements and flags ambiguity before handing them to multi-agent coding frameworks."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Abhavya" },
+  { name = "Nithya Patel" },
+]
+dependencies = [
+  "fastapi>=0.110.0",
+  "uvicorn[standard]>=0.29.0",
+  "sqlalchemy>=2.0.0",
+  "pydantic>=2.0.0",
+  "pydantic-settings>=2.0.0",
+  "python-dotenv>=1.0.0",
+  "anthropic>=0.25.0",
+  "streamlit>=1.33.0",
+  "pandas>=2.0.0",
+  "scikit-learn>=1.4.0",
+  "scipy>=1.13.0",
+  "python-multipart>=0.0.9",
+  "python-docx>=1.1.0",
+  "pypdf>=4.0.0",
+  "spacy>=3.7.0",
+  "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-asyncio>=0.23.0",
+  "httpx>=0.27.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["specforge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
