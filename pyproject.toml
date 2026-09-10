@@ -45,3 +45,6 @@ include = ["specforge*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+markers = [
+    "integration: mark test as integration test needing external services/docker",
+]

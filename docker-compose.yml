@@ -9,24 +9,27 @@ services:
       - ./data:/app/data
     env_file:
       - .env
-    depends_on: []
-    # depends_on:
-    #   - db
 
-  # PostgreSQL service — uncomment when migrating from SQLite to Postgres.
-  # Also update DATABASE_URL in .env to:
-  #   postgresql://specforge:specforge@db:5432/specforge
-  #
-  # db:
-  #   image: postgres:16-alpine
-  #   environment:
-  #     POSTGRES_USER: specforge
-  #     POSTGRES_PASSWORD: specforge
-  #     POSTGRES_DB: specforge
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
+  metagpt:
+    build:
+      context: .
+      dockerfile: Dockerfile.metagpt
+    volumes:
+      - ./data/metagpt_workspace:/app/MetaGPT/workspace
+    env_file:
+      - .env
+
+# PostgreSQL service — uncomment when migrating from SQLite to Postgres.
+#   db:
+#     image: postgres:16-alpine
+#     environment:
+#       POSTGRES_USER: specforge
+#       POSTGRES_PASSWORD: specforge
+#       POSTGRES_DB: specforge
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
 
 # volumes:
 #   postgres_data:

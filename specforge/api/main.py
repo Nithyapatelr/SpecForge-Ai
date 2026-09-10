@@ -13,8 +13,9 @@ from pydantic import BaseModel
 from specforge.ambiguity.service import detect_and_store
 from specforge.classification.service import classify_and_store
 from specforge.db.init_db import init_db
-from specforge.db.models import Requirement
+from specforge.db.models import FailureLogs, MASRuns, Requirement
 from specforge.db.session import get_session
+from specforge.experiments.runner import run_comparative_experiment
 from specforge.ingestion.service import ingest_document
 from specforge.preprocessing.service import preprocess_requirement
 from specforge.reporting.annotator import generate_annotated_spec
@@ -151,3 +152,57 @@ def report_endpoint(source_doc_id: str):
     if report["summary"]["total_requirements"] == 0:
         raise HTTPException(status_code=404, detail=f"No requirements found for source_doc_id '{source_doc_id}'")
     return report
+
+
+class ExperimentRunRequest(BaseModel):
+    source_doc_id: str
+    task_description: str
+    framework_name: str = "metagpt"
+
+
+@app.post("/experiment/run")
+def run_experiment_endpoint(req: ExperimentRunRequest):
+    """
+    Run a comparative MAS experiment (baseline vs SpecForge-annotated).
+
+    Note: This endpoint can take several minutes as it invokes the MAS framework twice.
+    """
+    try:
+        res = run_comparative_experiment(
+            source_doc_id=req.source_doc_id,
+            task_description=req.task_description,
+            framework_name=req.framework_name,
+        )
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/experiment/history")
+def experiment_history_endpoint():
+    """Return past MAS runs with their failure counts, most recent first."""
+    with get_session() as session:
+        runs = (
+            session.query(MASRuns)
+            .order_by(MASRuns.run_timestamp.desc())
+            .all()
+        )
+        history = []
+        for r in runs:
+            failure_count = (
+                session.query(FailureLogs)
+                .filter(FailureLogs.run_id == r.run_id)
+                .count()
+            )
+            history.append({
+                "run_id": r.run_id,
+                "source_doc_id": r.source_doc_id,
+                "framework_name": r.framework_name,
+                "annotated": r.annotated,
+                "task_description": r.task_description,
+                "status": r.status,
+                "failure_count": failure_count,
+                "timestamp": r.run_timestamp.isoformat() if r.run_timestamp else None,
+            })
+        return {"total_runs": len(history), "runs": history}
+

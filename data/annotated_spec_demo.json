@@ -1,0 +1,491 @@
+{
+  "source_doc_id": "sample-01",
+  "generated_at": "2026-09-03T15:18:53.947394+00:00",
+  "requirements": [
+    {
+      "requirement_id": "52d6a616-937f-432a-af61-ea790c91e8fc",
+      "atomic_unit_text": "Hospital Appointment Management System \u2014 Sample Requirements\n\nFunctional Requirements\n\n1.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "eb356dd8-89f6-45aa-a8b5-ca462edbc890",
+      "atomic_unit_text": "The system shall allow registered patients to search for available appointment slots by selecting a medical specialty, preferred doctor, and date range.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "d52c4426-ba62-4848-b6e0-9702d22fc3d6",
+      "atomic_unit_text": "2.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "a93d7268-a925-4ff3-85e6-4a20fbf06fe0",
+      "atomic_unit_text": "When a patient books an appointment, the system shall send a confirmation notification to both the patient and the assigned doctor within 60 seconds.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "d4bb35d3-1a06-4cdf-a1b7-dc0840e62d2d",
+      "atomic_unit_text": "3.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "a969e0e8-b37a-4216-aea8-499c4b167ee0",
+      "atomic_unit_text": "The system shall allow patients to cancel or reschedule an appointment up to 24 hours before the scheduled time without any penalty.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "e56f6018-8652-464f-a880-740d74709fe6",
+      "atomic_unit_text": "4.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "9dc68ddc-04fe-401c-b476-9d0abf9318ba",
+      "atomic_unit_text": "If a patient fails to cancel within the 24-hour window, the system shall record a no-show event and notify the billing module to apply a late-cancellation fee.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "e490440a-086c-4a90-a764-66880ec35d7c",
+      "atomic_unit_text": "5.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "5698d6bc-95f9-4470-a421-60f2003e8441",
+      "atomic_unit_text": "An appointment moves from the state 'Requested' to 'Confirmed' once a doctor or receptionist accepts it; it moves to 'Cancelled' if either party withdraws before the appointment time; and it moves to 'Completed' once the doctor marks the visit as done.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "c2233355-864f-4a18-a296-05f2b3a6a03f",
+      "atomic_unit_text": "6.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "c1951d00-1906-4e1e-ac0e-ff455610e9ff",
+      "atomic_unit_text": "Only users assigned the 'Receptionist' or 'Doctor' role shall be permitted to modify another patient's appointment on their behalf.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: passive_voice_no_actor: be permitted",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "98d8c87e-ec4c-4657-8b65-125f53c7e26b",
+      "atomic_unit_text": "7.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "b7138419-dec7-436f-b4f2-db5e1a211be9",
+      "atomic_unit_text": "The patient date-of-birth field must be stored in ISO 8601 format (YYYY-MM-DD).",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: passive_voice_no_actor: be stored",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "67c07997-555d-4eb6-94f8-dcf4d0b10859",
+      "atomic_unit_text": "The patient date-of-birth field must not be a future date.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "0766c1c7-47d7-4d9e-8cd4-1ffa90cfed64",
+      "atomic_unit_text": "8.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "06eea6d1-b7bb-4665-b3f4-724a80bbb88b",
+      "atomic_unit_text": "The system shall integrate with the Twilio SMS API to send appointment reminders 24 hours and 1 hour before the scheduled time; if Twilio is unavailable the system shall retry twice before logging the failure.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "de7ecb9d-bfd2-4220-86ac-f3d9dc5a9533",
+      "atomic_unit_text": "9.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "a8b18dc8-9b96-4a6d-b111-8f189847bbd9",
+      "atomic_unit_text": "The appointment booking page must load within 2 seconds for 95 percent of requests under a simulated load of 100 concurrent users.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "64a4dd72-ae84-436c-b1aa-e90094855359",
+      "atomic_unit_text": "10.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "341dbd23-6ff0-41be-af2a-68f85562731a",
+      "atomic_unit_text": "The system should respond quickly to all user interactions.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.7,
+      "ambiguity_reasons": [
+        "Heuristics: vague_quantifier: quickly | missing_measurable_value: quickly",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "87081df1-0ea7-4ccf-a308-66c14821bb89",
+      "atomic_unit_text": "11.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "860a84d9-4b01-4dfd-9432-692fe7a26be3",
+      "atomic_unit_text": "The system shall provide a user-friendly interface that non-technical staff can operate without training.\n12.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: vague_quantifier: user-friendly",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "42c9386b-aa0b-4862-8e24-8aac9ffdad0c",
+      "atomic_unit_text": "Only a Senior Doctor may approve prescriptions for Schedule II controlled substances; a General Practitioner may approve all other prescriptions.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "5dcc341c-e7b9-403a-8cba-ab98d5d0dcad",
+      "atomic_unit_text": "13.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "871c5814-2f70-4aae-8e5c-c21705a8a1c3",
+      "atomic_unit_text": "Each prescription record must contain: prescription_id (UUID), patient_id (UUID), doctor_id (UUID), medication_name (string, max 255 characters), dosage (string), and issue_date (ISO 8601 date).",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "751bb84c-1d04-417e-a563-3242d48dec72",
+      "atomic_unit_text": "14.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "96056c1c-6673-44f0-9ccf-755c18f4461f",
+      "atomic_unit_text": "The system shall export patient appointment history as a PDF report.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "e35aef3f-f98f-44a1-afe5-06b51330d756",
+      "atomic_unit_text": "The system shall send it to the patient's registered email address upon request.\n15.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "50b4fe78-9696-47f7-b4ab-5a2274c64ad9",
+      "atomic_unit_text": "The report generation for a 12-month appointment history must complete in under 5 seconds when the patient has fewer than 500 appointments on record.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "82c319c8-b17c-4ee1-bf77-5c33407ca5b1",
+      "atomic_unit_text": "The system shall allow registered patients to search for available appointment slots by selecting a medical specialty, preferred doctor, and date range.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "1ca51ee6-a734-4806-b075-a1a391505737",
+      "atomic_unit_text": "When a patient books an appointment, the system shall send a confirmation notification to both the patient and the assigned doctor within 60 seconds.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "13b8ab02-10e4-4cc4-a9ed-49c0def0d37f",
+      "atomic_unit_text": "The system shall allow patients to cancel or reschedule an appointment up to 24 hours before the scheduled time without any penalty.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "e1397ff2-ba0e-488b-95d4-82c18859f2dd",
+      "atomic_unit_text": "If a patient fails to cancel within the 24-hour window, the system shall record a no-show event and notify the billing module to apply a late-cancellation fee.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "471d9d9a-8689-4004-a134-a3b32837173b",
+      "atomic_unit_text": "An appointment moves from the state 'Requested' to 'Confirmed' once a doctor or receptionist accepts it; it moves to 'Cancelled' if either party withdraws before the appointment time; and it moves to 'Completed' once the doctor marks the visit as done.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "d9efcb7d-ac77-43b9-a816-467930efa619",
+      "atomic_unit_text": "Only users assigned the 'Receptionist' or 'Doctor' role shall be permitted to modify another patient's appointment on their behalf.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: passive_voice_no_actor: be permitted",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "c1c0c3c2-f377-4f91-9392-31d24365310b",
+      "atomic_unit_text": "The patient date-of-birth field must be stored in ISO 8601 format (YYYY-MM-DD).",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: passive_voice_no_actor: be stored",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "dbfcc03f-3e1d-4366-b423-984dc4740bd1",
+      "atomic_unit_text": "The patient date-of-birth field must not be a future date.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "ea895c70-02fc-4c43-bd20-871cb4928e8f",
+      "atomic_unit_text": "The system shall integrate with the Twilio SMS API to send appointment reminders 24 hours and 1 hour before the scheduled time; if Twilio is unavailable the system shall retry twice before logging the failure.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "434e938b-db93-4de9-9234-9e7e58ff0601",
+      "atomic_unit_text": "The appointment booking page must load within 2 seconds for 95 percent of requests under a simulated load of 100 concurrent users.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "64694b7c-f48b-46e3-ad59-5cc2bf6bfeb8",
+      "atomic_unit_text": "The system should respond quickly to all user interactions.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.7,
+      "ambiguity_reasons": [
+        "Heuristics: vague_quantifier: quickly | missing_measurable_value: quickly",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "3ae8abcc-3dbf-407b-8cb1-bf2065f8fc0e",
+      "atomic_unit_text": "The system shall provide a user-friendly interface that non-technical staff can operate without training.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.35,
+      "ambiguity_reasons": [
+        "Heuristics: vague_quantifier: user-friendly",
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "91fede54-730e-4cf3-abe1-658747658c4a",
+      "atomic_unit_text": "Only a Senior Doctor may approve prescriptions for Schedule II controlled substances; a General Practitioner may approve all other prescriptions.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "563ffc85-9adf-4602-bae9-15a339f4b22f",
+      "atomic_unit_text": "Each prescription record must contain: prescription_id (UUID), patient_id (UUID), doctor_id (UUID), medication_name (string, max 255 characters), dosage (string), and issue_date (ISO 8601 date).",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "1ebd5718-74ed-4e7d-befd-cb70f4f2e9f1",
+      "atomic_unit_text": "The system shall export patient appointment history as a PDF report.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "68796c25-da4c-44f2-9f50-d563ec5bb73c",
+      "atomic_unit_text": "The system shall send it to the patient's registered email address upon request.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    },
+    {
+      "requirement_id": "196b5f91-0b37-456c-ace6-8a1224178f6c",
+      "atomic_unit_text": "The report generation for a 12-month appointment history must complete in under 5 seconds when the patient has fewer than 500 appointments on record.",
+      "rit_label": "Unclassified",
+      "rit_confidence": 0.0,
+      "ambiguity_score": 0.0,
+      "ambiguity_reasons": [
+        "LLM: LLM scoring skipped or unavailable."
+      ]
+    }
+  ],
+  "summary": {
+    "total_requirements": 47,
+    "label_distribution": {
+      "Unclassified": 47
+    },
+    "high_ambiguity_count": 2
+  }
+}

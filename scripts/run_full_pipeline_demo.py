@@ -12,6 +12,10 @@ import json
 import os
 import sys
 
+# Ensure UTF-8 output on Windows consoles
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from specforge.ambiguity.service import detect_and_store
@@ -25,7 +29,7 @@ from scripts.seed_taxonomy import seed_taxonomy
 
 def main():
     print("=" * 70)
-    print(" 🛡️  SPECFORGE AI — PHASE 1 END-TO-END PIPELINE DEMO")
+    print(" SPECFORGE AI -- PHASE 1 END-TO-END PIPELINE DEMO")
     print("=" * 70)
 
     # 1. Initialize DB & Seed Taxonomy
@@ -82,7 +86,7 @@ def main():
     # Print Summary Report to Console
     summary = report["summary"]
     print("\n" + "=" * 70)
-    print(" 📈  PIPELINE EXECUTION SUMMARY")
+    print(" PIPELINE EXECUTION SUMMARY")
     print("=" * 70)
     print(f" Source Doc ID:            {report['source_doc_id']}")
     print(f" Total Atomic Requirements: {summary['total_requirements']}")
@@ -100,7 +104,7 @@ def main():
         print(f"    Reasons: {' | '.join(r['ambiguity_reasons'])}")
 
     print("\n" + "=" * 70)
-    print(" ✅  DEMO COMPLETE")
+    print(" DEMO COMPLETE")
     print("=" * 70)
 
 

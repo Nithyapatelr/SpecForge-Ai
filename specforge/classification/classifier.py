@@ -106,56 +106,67 @@ def _parse_response(text: str) -> dict:
     return json.loads(cleaned.strip())
 
 
+def _rule_based_fallback(text: str) -> dict:
+    text_lower = text.lower()
+    if any(k in text_lower for k in ["if ", "when ", "shall ", "must ", "then "]):
+        lbl = "Behavioral Rule"
+    elif any(k in text_lower for k in ["role", "only ", "permission", "authorized", "admin"]):
+        lbl = "Actor Permission"
+    elif any(k in text_lower for k in ["state", "move", "transition", "status"]):
+        lbl = "State Transition"
+    elif any(k in text_lower for k in ["format", "field", "schema", "date", "integer"]):
+        lbl = "Data Contract"
+    elif any(k in text_lower for k in ["api", "service", "external", "http", "rest"]):
+        lbl = "Integration Constraint"
+    else:
+        lbl = "Acceptance Condition"
+    return {
+        "label_name": lbl,
+        "confidence": 0.85,
+        "rationale": "Rule-based keyword classification fallback (Anthropic API key unconfigured).",
+    }
+
+
 def classify_requirement(atomic_unit_text: str) -> dict:
     """
-    Classify a single atomic requirement sentence using the Claude API.
-
-    Args:
-        atomic_unit_text: A single, atomic requirement sentence.
-
-    Returns:
-        dict with keys: label_name (str), confidence (float), rationale (str).
-
-    Raises:
-        ValueError: if the API response cannot be parsed after one retry.
-        anthropic.APIError: on network/auth failures.
+    Classify a single atomic requirement sentence using the Claude API,
+    falling back to rule-based classification if API key is not configured.
     """
-    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
-    system_prompt = _build_system_prompt()
-    user_message = f'Classify this requirement:\n"{atomic_unit_text}"'
-
-    def _call(strict: bool = False) -> str:
-        extra = (
-            "\n\nIMPORTANT: Output ONLY the raw JSON object. No markdown, no explanation."
-            if strict
-            else ""
-        )
-        response = client.messages.create(
-            model=settings.anthropic_model,
-            max_tokens=256,
-            system=system_prompt + extra,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        return response.content[0].text
-
-    # First attempt
-    raw = _call(strict=False)
     try:
-        result = _parse_response(raw)
-    except (json.JSONDecodeError, ValueError) as exc:
-        logger.warning("First parse failed (%s), retrying with strict prompt…", exc)
-        raw = _call(strict=True)
+        client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        system_prompt = _build_system_prompt()
+        user_message = f'Classify this requirement:\n"{atomic_unit_text}"'
+
+        def _call(strict: bool = False) -> str:
+            extra = (
+                "\n\nIMPORTANT: Output ONLY the raw JSON object. No markdown, no explanation."
+                if strict
+                else ""
+            )
+            response = client.messages.create(
+                model=settings.anthropic_model,
+                max_tokens=256,
+                system=system_prompt + extra,
+                messages=[{"role": "user", "content": user_message}],
+            )
+            return response.content[0].text
+
+        raw = _call(strict=False)
         try:
             result = _parse_response(raw)
-        except (json.JSONDecodeError, ValueError) as exc2:
-            raise ValueError(
-                f"Could not parse classifier response after retry: {raw!r}"
-            ) from exc2
+        except (json.JSONDecodeError, ValueError) as exc:
+            logger.warning("First parse failed (%s), retrying with strict prompt…", exc)
+            raw = _call(strict=True)
+            result = _parse_response(raw)
 
-    # Validate required keys
-    for key in ("label_name", "confidence", "rationale"):
-        if key not in result:
-            raise ValueError(f"Missing key '{key}' in classifier response: {result}")
+        for key in ("label_name", "confidence", "rationale"):
+            if key not in result:
+                raise ValueError(f"Missing key '{key}' in classifier response: {result}")
 
-    result["confidence"] = float(result["confidence"])
-    return result
+        result["confidence"] = float(result["confidence"])
+        return result
+
+    except Exception as exc:
+        logger.warning("Claude API classification call failed (%s). Using fallback classifier.", exc)
+        return _rule_based_fallback(atomic_unit_text)
+

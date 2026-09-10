@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime, timezone
 
 from sqlalchemy import (
+    Boolean,
     Column,
     DateTime,
     Float,
@@ -153,3 +154,82 @@ class AmbiguityFlag(Base):
             f"<AmbiguityFlag req={self.requirement_id[:8]}… "
             f"score={self.ambiguity_score:.2f}>"
         )
+
+
+class MASTTaxonomy(Base):
+    """
+    MAST (Multi-Agent System Failure Taxonomy) category and mode definitions.
+    Seeded via scripts/seed_mast_taxonomy.py based on Cemri et al. (2025).
+    """
+
+    __tablename__ = "mast_taxonomy"
+
+    failure_mode_id: str = Column(String, primary_key=True)
+    category: str = Column(String, nullable=False)
+    mode_name: str = Column(String, nullable=False)
+    mode_definition: str = Column(Text, nullable=False)
+
+    # Relationships
+    failure_logs = relationship("FailureLogs", back_populates="mast_failure_mode")
+
+    def __repr__(self) -> str:
+        return f"<MASTTaxonomy {self.failure_mode_id}: {self.mode_name}>"
+
+
+class MASRuns(Base):
+    """
+    Execution trace metadata for a Multi-Agent System (MAS) framework run.
+    """
+
+    __tablename__ = "mas_runs"
+
+    run_id: str = Column(String, primary_key=True, default=_uuid)
+    source_doc_id: str = Column(String, nullable=True)
+    framework_name: str = Column(String, nullable=False)
+    annotated: bool = Column(Boolean, nullable=False, default=False)
+    task_description: str = Column(Text, nullable=False)
+    run_timestamp: datetime = Column(DateTime, default=_now)
+    raw_trace_path: str = Column(String, nullable=True)
+    status: str = Column(String, nullable=False, default="running")
+
+    # Relationships
+    failure_logs = relationship(
+        "FailureLogs", back_populates="run", cascade="all, delete-orphan"
+    )
+
+    def __repr__(self) -> str:
+        return (
+            f"<MASRuns {self.run_id[:8]} framework={self.framework_name} "
+            f"annotated={self.annotated} status={self.status}>"
+        )
+
+
+class FailureLogs(Base):
+    """
+    Log of a single detected MAST failure mode during a MAS framework run.
+    """
+
+    __tablename__ = "failure_logs"
+
+    failure_id: str = Column(String, primary_key=True, default=_uuid)
+    run_id: str = Column(
+        String, ForeignKey("mas_runs.run_id"), nullable=False
+    )
+    mast_failure_mode_id: str = Column(
+        String, ForeignKey("mast_taxonomy.failure_mode_id"), nullable=False
+    )
+    failure_description: str = Column(Text, nullable=False)
+    agent_stage: str = Column(String, nullable=False)
+    confidence: float = Column(Float, nullable=False)
+    timestamp: datetime = Column(DateTime, default=_now)
+
+    # Relationships
+    run = relationship("MASRuns", back_populates="failure_logs")
+    mast_failure_mode = relationship("MASTTaxonomy", back_populates="failure_logs")
+
+    def __repr__(self) -> str:
+        return (
+            f"<FailureLogs {self.failure_id[:8]} mode={self.mast_failure_mode_id} "
+            f"stage={self.agent_stage} conf={self.confidence:.2f}>"
+        )
+
