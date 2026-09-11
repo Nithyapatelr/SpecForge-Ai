@@ -1,0 +1,24 @@
+E-Commerce Platform — Order Management Requirements
+
+Functional Requirements
+
+1. The system shall allow registered customers to browse products by category, brand, price range, and customer rating.
+2. When a customer places an order, the system shall deduct the ordered quantity from inventory within 5 seconds and send an order confirmation email.
+3. An order transitions from 'Pending' to 'Processing' once payment is confirmed; from 'Processing' to 'Shipped' once a tracking number is assigned; and from 'Shipped' to 'Delivered' once the carrier marks it as delivered.
+4. Only users with the 'Warehouse Manager' role shall be permitted to update inventory stock levels directly.
+5. The product SKU field must be a string of exactly 12 alphanumeric characters and must be unique across the product catalog.
+6. The system shall integrate with Stripe Payment Gateway; if Stripe is unavailable, it shall attempt PayPal as a fallback before failing the transaction.
+7. The product listing page shall load within 1.5 seconds for 95% of requests under 500 concurrent users.
+8. The system should make shopping easy and enjoyable for customers.
+9. A customer may return a product within 30 days of delivery; the system shall automatically issue a refund to the original payment method within 3 business days of receiving the returned item.
+10. Only a 'Store Admin' may create, update, or deactivate product listings; 'Sales Staff' may view product details but not modify them.
+11. Each order record must contain: order_id (UUID), customer_id (UUID), order_date (ISO 8601 datetime), line_items (array), total_amount (decimal, 2 decimal places), and status (enum: Pending|Processing|Shipped|Delivered|Cancelled|Refunded).
+12. The system shall apply discount codes at checkout; a discount code must reduce the cart total by the specified percentage or fixed amount but shall never reduce the total below zero.
+13. If a customer's payment fails, the system shall retain the cart contents for 15 minutes and prompt the customer to retry or use a different payment method.
+14. The checkout page must complete the full payment flow in under 3 seconds at 200 concurrent users.
+15. The system shall send abandoned cart reminder emails 1 hour and 24 hours after a customer adds items to the cart without completing checkout.
+16. Product reviews must be submitted by customers who have purchased the product; the system shall reject review submissions from non-purchasers.
+17. The system shall provide good customer support features.
+18. The search functionality shall return relevant results and support typo tolerance for queries with up to 2 character errors.
+19. All customer payment card data must be tokenized before storage; the system must never store raw card numbers.
+20. The system shall generate a daily sales report in CSV format and deposit it in the configured S3 bucket by 02:00 UTC each day.

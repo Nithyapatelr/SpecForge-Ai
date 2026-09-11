@@ -1,0 +1,26 @@
+Project Management Tool — Task and Workflow Requirements
+
+Functional Requirements
+
+1. The system shall allow project managers to create projects by specifying project name, description, start date, target end date, budget, and assigning team members.
+2. When a task is assigned to a team member, the system shall send a notification via email and in-app within 60 seconds of assignment.
+3. A task transitions from 'Backlog' to 'In Progress' when a team member begins work; to 'In Review' when submitted for review; to 'Done' when the reviewer approves; and to 'Blocked' when an impediment is logged.
+4. Only 'Project Managers' and 'Product Owners' may move tasks to 'Done'; team members may only move tasks to 'In Review'.
+5. Each task record must contain: task_id (UUID), project_id (FK), title (string, max 255), description (text), assignee_id (FK, nullable), priority (enum: Critical|High|Medium|Low), story_points (integer), due_date (ISO 8601 date), and status (enum).
+6. The system shall integrate with GitHub and GitLab APIs to link commits and pull requests to tasks; merged PRs must automatically transition the linked task to 'In Review'.
+7. The Kanban board must load within 2 seconds for boards with up to 500 tasks.
+8. The tool should help teams collaborate more effectively.
+9. Sprint planning must enforce velocity limits: the total story points planned per sprint must not exceed 110% of the team's average velocity over the last 3 sprints.
+10. Only team members assigned to the project may view project data; guests may view a read-only project summary if explicitly granted access by the project manager.
+11. Each sprint record must contain: sprint_id (UUID), project_id (FK), name (string), start_date (ISO 8601 date), end_date (ISO 8601 date), goal (text), planned_points (integer), and completed_points (integer).
+12. Burndown charts must be calculated nightly and be accessible in the project analytics dashboard.
+13. The system shall send daily standup reminders to all active team members at a configured time and collect async status updates through a structured form.
+14. Blocked tasks must generate an escalation notification to the project manager if the impediment is not resolved within 2 business days.
+15. All project data must be exportable in JIRA-compatible JSON format for migration purposes.
+16. The system shall calculate project health metrics: schedule variance (SV), cost performance index (CPI), and completion percentage, updated daily.
+17. The tool should make project reporting less time-consuming.
+18. Time tracking entries must capture: entry_id (UUID), task_id (FK), team_member_id (FK), hours (decimal, 2 decimal places), date (ISO 8601 date), and description (text).
+19. The system shall enforce working hour limits: no team member may log more than 12 hours per day in the time tracking system; entries exceeding this must be flagged.
+20. Resource allocation reports must show each team member's planned vs. actual hours per sprint, available capacity, and allocation percentage.
+21. The system shall support dependency mapping between tasks; circular dependencies must be detected and rejected by the system.
+22. Retrospective action items must be tracked as tasks in the following sprint; completion rate of retrospective actions must be reported in the sprint review dashboard.

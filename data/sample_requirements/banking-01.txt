@@ -1,0 +1,26 @@
+Retail Banking Platform — Account and Transaction Requirements
+
+Functional Requirements
+
+1. The system shall allow customers to open a savings or checking account online by submitting identity documents, address proof, and completing KYC verification.
+2. When a transaction is initiated, the system shall validate available balance, apply any applicable transaction limits, and post the debit or credit within 2 seconds.
+3. An account transitions from 'Pending KYC' to 'Active' once identity verification is approved; from 'Active' to 'Frozen' if suspicious activity is flagged; and from 'Frozen' to 'Closed' upon customer request after review.
+4. Only users with the 'Compliance Officer' role shall have permission to unfreeze a flagged account.
+5. Each transaction record must contain: transaction_id (UUID), account_id (UUID), transaction_type (enum: Debit|Credit|Transfer|Fee), amount (decimal, 2 decimal places), currency (ISO 4217 3-letter code), timestamp (ISO 8601), and status (enum: Pending|Completed|Reversed|Failed).
+6. The system shall integrate with the national SWIFT network for international wire transfers; if SWIFT is unavailable, the transaction must be queued and retried within 30 minutes.
+7. The mobile banking login must complete within 1 second for 99% of requests.
+8. The system should be secure and trustworthy for customers.
+9. Customers must be authenticated using multi-factor authentication (MFA) before performing any transaction exceeding $500.
+10. Only a 'Branch Manager' may approve loan applications above $50,000; amounts below this threshold may be auto-approved by the credit scoring engine.
+11. The system shall send real-time push notifications and SMS alerts for every debit transaction exceeding $100.
+12. If a debit transaction would cause the account balance to fall below zero, the system shall decline the transaction unless the account has an approved overdraft limit.
+13. The credit scoring engine must evaluate loan eligibility using the applicant's credit bureau score, debt-to-income ratio, and employment history.
+14. All inter-bank transfers must be completed within the regulatory limit of T+1 business days.
+15. The system shall archive transaction records older than 7 years to cold storage and make them accessible to compliance officers on demand within 48 hours.
+16. The system shall detect and flag transactions matching known fraud patterns using rule-based and ML-based detection in real time.
+17. Account statements must be available for download in PDF and CSV format for up to 5 years of history.
+18. The system should be fast and handle many users at once.
+19. The system shall comply with PCI-DSS Level 1 requirements for all card data processing and storage.
+20. Passwords must be hashed using bcrypt with a minimum work factor of 12 before storage; plain-text passwords must never be stored.
+21. The system shall enforce daily transfer limits per account tier: Basic ($5,000), Premium ($25,000), Private Banking (unlimited with manual approval above $100,000).
+22. Loan repayment schedules must be generated using the amortization formula and stored as a structured JSON array in the loan record.

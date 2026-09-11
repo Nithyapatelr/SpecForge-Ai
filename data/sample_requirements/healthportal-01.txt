@@ -1,0 +1,25 @@
+Healthcare Patient Portal — Health Records and Communication Requirements
+
+Functional Requirements
+
+1. The system shall allow patients to view their medical history, lab results, medication lists, and immunization records through a secure online portal.
+2. When a lab result is published by the laboratory, the system shall notify the ordering physician within 5 minutes and make the result visible to the patient after the physician reviews it.
+3. A lab result transitions from 'Pending' to 'Available to Physician' when published; to 'Released to Patient' when the physician marks it reviewed; to 'Critcal Value Alerted' if the result is flagged as critical by the lab.
+4. Only the treating physician and care team members assigned to the patient may access full medical records; patients may access their own records but not modify them.
+5. Each lab result record must contain: result_id (UUID), patient_id (FK), ordering_physician_id (FK), test_code (LOINC), result_value (string), reference_range (string), unit (string), collected_at (ISO 8601), and status (enum).
+6. The system shall integrate with the HL7 FHIR API of connected hospital systems to retrieve and synchronize patient records.
+7. Patient portal page load time must not exceed 2 seconds for 95% of authenticated users.
+8. The portal should help patients understand their health better.
+9. Critical lab values must trigger an immediate phone call to the ordering physician via the automated calling system in addition to in-system notification.
+10. Only patients who have provided electronic consent for record sharing may have their records shared with external providers via the patient portal.
+11. Each secure message between patient and physician must contain: message_id (UUID), sender_id (FK), recipient_id (FK), subject (string), body (encrypted text), sent_at (ISO 8601), and is_read (boolean).
+12. The system shall enforce a maximum response time commitment for physician replies to patient messages: routine messages within 2 business days; urgent messages within 4 hours.
+13. Prescription refill requests submitted via the portal must be routed to the prescribing physician for approval; approved refills must be transmitted to the pharmacy within 30 minutes.
+14. The system shall allow patients to schedule follow-up appointments directly through the portal; scheduling must check real-time physician availability.
+15. All PHI (Protected Health Information) must be handled in compliance with HIPAA; all data access events must be audit-logged.
+16. Patient consent forms must be versioned; when a new version is published, all patients must re-acknowledge consent before accessing the portal.
+17. The system should make healthcare more convenient.
+18. The system shall send automated appointment reminders 48 hours and 2 hours before each appointment via the patient's preferred communication channel (SMS, email, or push notification).
+19. The portal must support accessibility standards (WCAG 2.1 AA) to ensure usability for patients with disabilities.
+20. Health summary exports must be available in FHIR JSON and PDF formats; exports must be generated within 60 seconds.
+21. The system shall generate monthly population health reports for enrolled physician practices, summarizing patient adherence rates, chronic condition management metrics, and preventive care completion.

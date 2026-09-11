@@ -1,0 +1,25 @@
+Pharmaceutical Drug Inventory Management — Controlled Substance Requirements
+
+Functional Requirements
+
+1. The system shall allow licensed pharmacists to receive, dispense, and return controlled and non-controlled medications with full chain-of-custody recording.
+2. When a controlled substance is dispensed, the system shall record the patient name, prescribing physician DEA number, prescription number, quantity dispensed, and dispensing pharmacist ID within the transaction.
+3. Controlled substance inventory transitions from 'Ordered' to 'In Transit' upon shipping confirmation; to 'Received' upon physical receipt and count verification; to 'Available' after quality check; to 'Dispensed' per individual dispense transaction.
+4. Only pharmacists with a valid DEA registration may receive, count, or dispense Schedule II controlled substances.
+5. Each dispense transaction record must contain: transaction_id (UUID), rx_number (string), patient_id (FK), prescriber_dea (string), drug_ndc (string, 11 digits), quantity (integer), dispense_date (ISO 8601), pharmacist_id (FK), and lot_number (string).
+6. The system shall integrate with the state Prescription Drug Monitoring Program (PDMP) API to query and submit dispense records for controlled substances in real time.
+7. PDMP submission must complete within 60 seconds of dispense transaction creation.
+8. The system should help pharmacies manage their drug inventory efficiently.
+9. Schedule II controlled substances must be counted by two pharmacists; both must confirm the count in the system before the inventory record is accepted.
+10. Only a Pharmacist-in-Charge may authorize write-offs for damaged, expired, or stolen controlled substances; write-off records must include DEA Form 41 data.
+11. Each controlled substance inventory record must contain: inventory_id (UUID), drug_ndc (string), lot_number (string), expiry_date (ISO 8601 date), quantity_on_hand (integer), storage_location (string), and last_count_date (ISO 8601).
+12. The system shall enforce quantity limits for controlled substance dispensing per prescription; quantities exceeding the prescription limit must be rejected.
+13. Automated alerts must be sent when any controlled substance's stock falls below the configured minimum level or when stock exceeds the maximum permitted quantity.
+14. All controlled substance transactions must be reconcilable to within a zero-variance tolerance; any discrepancy must trigger an immediate investigation workflow.
+15. The system must generate DEA ARCOS-format reports for Schedule I and II drugs monthly and transmit them to the DEA reporting endpoint.
+16. Expired medications must be segregated automatically by the system 30 days before expiry; disposal must be documented and submitted to the DEA within 30 days of disposal.
+17. The system should handle all types of medications properly.
+18. Drug-drug interaction checking must be performed at dispense time using the configured clinical decision support engine; critical interactions must block dispense and require pharmacist override with documented reason.
+19. The system shall support perpetual inventory tracking; every receipt, dispense, return, and adjustment must update the perpetual balance in real time.
+20. Annual physical inventory counts for controlled substances must be conducted within 2 years of the previous count as required by DEA regulations; the system shall schedule and track this.
+21. Patient counseling records must document that the pharmacist provided drug usage instructions and potential side effects; this must be captured per dispense transaction.

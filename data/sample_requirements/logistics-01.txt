@@ -1,0 +1,25 @@
+Logistics and Shipping Platform — Shipment Tracking Requirements
+
+Functional Requirements
+
+1. The system shall allow shippers to create shipment records by entering sender and receiver addresses, package dimensions, weight, declared value, and service type.
+2. When a shipment label is generated, the system shall assign a unique tracking number and transmit the shipment manifest to the assigned carrier within 2 minutes.
+3. A shipment transitions from 'Label Created' to 'Picked Up' upon carrier scan; to 'In Transit' at each intermediate scan point; to 'Out for Delivery' at the destination facility; and to 'Delivered' upon recipient signature or delivery confirmation scan.
+4. Only 'Fleet Coordinators' and 'Dispatch Managers' may reassign a shipment to a different carrier after the label is created.
+5. Each shipment record must contain: tracking_number (string, unique, 18 characters), shipper_id (FK), receiver_address (JSON), package_weight_kg (decimal), dimensions_cm (JSON with L/W/H), declared_value (decimal), service_type (enum: Standard|Express|Overnight), and status (enum).
+6. The system shall integrate with FedEx, UPS, and DHL APIs to retrieve real-time carrier tracking events and synchronize status every 15 minutes.
+7. Shipment tracking status must be updated within 10 minutes of a carrier scan event.
+8. The system should make shipping easy for businesses.
+9. Dimensional weight must be calculated as (L * W * H) / 5000 and billed at the higher of actual weight or dimensional weight.
+10. Only verified business accounts may access bulk shipment creation (more than 50 shipments per batch); individual accounts are limited to 10 per batch.
+11. Each customs declaration record for international shipments must include: HS code, country of origin, description of goods, quantity, and declared value in USD.
+12. The system shall automatically generate customs documents (Commercial Invoice, Packing List) for international shipments and attach them to the shipment record.
+13. Delivery exception alerts (e.g., address not found, recipient unavailable) must be sent to the shipper within 30 minutes of the exception being logged by the carrier.
+14. The system shall enforce carrier-specific size and weight limits; shipments exceeding limits must be flagged and require manual carrier confirmation.
+15. Proof of delivery (POD) records (recipient signature image, timestamp, GPS coordinates) must be stored and accessible to the shipper within 2 hours of delivery.
+16. The system shall generate a monthly shipment volume and cost report by service type, carrier, and destination region.
+17. The system should help reduce shipping costs.
+18. Insurance claims for lost or damaged shipments must be submitted through the platform within 60 days of the estimated delivery date.
+19. The system shall support return shipment generation; return labels must be pre-paid and generated within 5 minutes of a return request.
+20. All address data must be validated against the national postal address database before shipment creation; invalid addresses must return a descriptive error.
+21. The system shall track carrier on-time delivery performance per route and generate a quarterly carrier scorecard for procurement review.

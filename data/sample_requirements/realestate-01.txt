@@ -1,0 +1,25 @@
+Real Estate Property Management System — Lease and Tenant Requirements
+
+Functional Requirements
+
+1. The system shall allow property managers to list rental units by entering property address, unit number, floor area, rent amount, available date, and amenities.
+2. When a tenant application is received, the system shall send an acknowledgment within 30 minutes and initiate background check and credit screening automatically.
+3. A lease transitions from 'Draft' to 'Active' upon tenant signature and receipt of security deposit; to 'Expiring' 60 days before end date; to 'Expired' on end date if not renewed; and to 'Terminated' upon early termination.
+4. Only the 'Property Manager' role may set or change rent amounts; 'Leasing Agents' may create listings but may not modify financial terms.
+5. Each lease record must contain: lease_id (UUID), unit_id (FK), tenant_id (FK), start_date (ISO 8601 date), end_date (ISO 8601 date), monthly_rent (decimal), security_deposit (decimal), and status (enum).
+6. The system shall integrate with Equifax and TransUnion credit bureaus for automated tenant credit screening.
+7. Rent payment reminders must be sent 5 days before the due date via email and SMS.
+8. The system should make property management easier and less stressful.
+9. Late rent payments must automatically generate a late fee of 5% of monthly rent after 5 calendar days of non-payment.
+10. Only tenants with an active lease may submit maintenance requests through the portal; prospective tenants may not access the maintenance module.
+11. Each maintenance request must contain: request_id (UUID), unit_id (FK), tenant_id (FK), description (text), priority (enum: Emergency|High|Medium|Low), submitted_at (ISO 8601), and status (enum).
+12. Emergency maintenance requests must be dispatched to an on-call maintenance technician within 15 minutes of submission.
+13. The system shall calculate and process monthly rent charges, late fees, and utility reimbursements automatically on the 1st of each month.
+14. Security deposit refund processing must be initiated within 21 days of lease termination in compliance with local tenancy law.
+15. All lease documents must be digitally signed using a certified e-signature provider; wet signatures are not accepted.
+16. The system shall generate an owner statement monthly for each property, detailing rent collected, maintenance expenses, management fees, and net owner distribution.
+17. The system should help landlords maximize rental income.
+18. Prospective tenants must pass credit score (minimum 650), background check (no felony convictions), and income verification (gross income 3x monthly rent) to be approved.
+19. Maintenance vendor invoices must be three-way matched against the work order and purchase order before payment approval.
+20. The system shall enforce lease renewal workflows: the tenant must be offered renewal terms 90 days before lease expiry; non-response after 30 days must trigger escalation.
+21. Utility submetering data must be integrated from smart meters; tenant utility bills must be calculated and issued within 3 business days of meter read.

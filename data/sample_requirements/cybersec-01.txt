@@ -1,0 +1,24 @@
+Cybersecurity Monitoring System — Threat Detection Requirements
+
+Functional Requirements
+
+1. The system shall collect and aggregate security event logs from firewalls, IDS/IPS, endpoint agents, and cloud services in real time.
+2. When a critical severity alert is triggered, the system shall notify the on-call SOC analyst via PagerDuty within 60 seconds and create an incident ticket in Jira automatically.
+3. An alert transitions from 'New' to 'Acknowledged' when a SOC analyst assigns it; to 'In Investigation' when analysis begins; to 'Resolved' when the threat is contained; and to 'False Positive' if determined to be non-threatening.
+4. Only 'Senior SOC Analysts' and 'Incident Commanders' may escalate an alert to Critical severity; Tier 1 analysts may update status but not escalate.
+5. Each security event record must contain: event_id (UUID), source_system (string), event_type (string), severity (enum: Low|Medium|High|Critical), raw_log (text), detected_at (ISO 8601), and alert_id (FK, nullable).
+6. The system shall integrate with threat intelligence feeds (VirusTotal, MISP) to enrich alerts with IOC (Indicator of Compromise) data within 30 seconds of alert creation.
+7. Log ingestion pipeline must handle at least 100,000 events per second without dropping events.
+8. The system should make the organization more secure.
+9. Threat correlation rules shall be evaluated in real time; a rule triggering more than 100 false positives per day shall be automatically disabled and flagged for review.
+10. Only Incident Commanders may authorize isolation of a compromised host from the network; all other roles may recommend isolation but not execute it.
+11. Each incident record must contain: incident_id (UUID), severity (enum), affected_systems (array of strings), attack_vector (MITRE ATT&CK TTP code), discovered_at (ISO 8601), and remediation_steps (text).
+12. The SIEM shall retain hot storage (queryable) logs for 90 days and cold storage archives for 7 years in compliance with SOC 2 Type II requirements.
+13. Anomaly detection models must be retrained weekly using the past 30 days of labeled event data; retraining must not degrade detection accuracy below the established baseline.
+14. The system shall generate a weekly threat landscape report summarizing top attack vectors, alert volumes by severity, mean time to detect (MTTD), and mean time to respond (MTTR).
+15. All analyst actions on alerts and incidents must be audit-logged with actor identity, timestamp, and change details; logs must be immutable.
+16. The system shall support playbook automation; when a known attack pattern is detected, the configured automated response playbook must execute within 5 minutes.
+17. The system should have good dashboards for security teams.
+18. Vulnerability scan results from integrated scanners must be correlated with active assets and prioritized using CVSS scores.
+19. The system shall enforce role-based access control; analysts may only access logs and alerts for assets within their assigned scope.
+20. Incident post-mortem reports must be completed within 5 business days of incident resolution and reviewed by the CISO.

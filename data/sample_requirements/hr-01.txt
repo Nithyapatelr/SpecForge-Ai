@@ -1,0 +1,28 @@
+Human Resources Management System — Employee Lifecycle Requirements
+
+Functional Requirements
+
+1. The system shall allow HR administrators to create, update, and deactivate employee profiles including personal information, job title, department, and compensation details.
+2. When a new employee is onboarded, the system shall automatically provision accounts for email, Slack, and the project management tool within 4 hours of the start date being confirmed.
+3. An employee record transitions from 'Offer Extended' to 'Active' on the confirmed start date; from 'Active' to 'On Leave' when an approved leave request is active; and from 'Active' to 'Terminated' upon separation processing.
+4. Only the 'HR Director' or 'C-Suite' roles may view salary details for employees outside their direct reporting line.
+5. Each employee record must contain: employee_id (UUID), full_name (string, max 200 characters), date_of_birth (ISO 8601 date), national_id (string, encrypted), department_id (FK), job_title (string), hire_date (ISO 8601 date), and employment_type (enum: Full-Time|Part-Time|Contract|Intern).
+6. The system shall integrate with the payroll provider API (ADP) to push approved payroll runs 3 business days before each pay date.
+7. Leave balance calculations must complete within 500 milliseconds for any employee query.
+8. Managers should be able to easily track their team's performance.
+9. A leave request transitions from 'Submitted' to 'Approved' or 'Rejected' within 48 business hours; if no action is taken, the system shall escalate to the HR administrator.
+10. Only a direct manager or HR administrator may approve or reject leave requests; the requesting employee may not approve their own leave.
+11. The performance review cycle must be initiated quarterly; the system shall notify managers and employees 2 weeks before review deadlines.
+12. The payroll system must calculate gross pay, statutory deductions (tax, social security), and net pay correctly for all employment types.
+13. The system shall generate a headcount report by department, employment type, and tenure band on the first business day of each month.
+14. Employee self-service password reset must enforce the organizational password policy: minimum 12 characters, at least 1 uppercase, 1 lowercase, 1 digit, 1 special character.
+15. The system shall archive records of terminated employees for 7 years in compliance with labor law and restrict access to HR Director role only.
+16. Training completion certificates shall be automatically emailed to the employee upon completion of a mandatory training module.
+17. The system should be user-friendly for non-technical HR staff.
+18. All employee personal data must be stored in an encrypted database column using AES-256; decryption keys must not be stored in the same system.
+19. The system shall track and report overtime hours; any overtime exceeding 10 hours per week must trigger an alert to the employee's manager.
+20. Recruitment pipelines must track candidates from 'Applied' through 'Screened', 'Interviewed', 'Offered', and 'Hired' or 'Rejected' states.
+21. Only a recruiter or HR administrator may advance a candidate to the 'Offered' stage.
+22. The system shall produce an annual diversity and inclusion report summarizing workforce demographics by gender, age band, and ethnicity.
+23. Job postings must be published to LinkedIn, Indeed, and the company careers page simultaneously via API integration.
+24. The system should handle all HR needs effectively.

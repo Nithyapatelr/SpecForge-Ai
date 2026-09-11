@@ -1,0 +1,24 @@
+Warehouse Inventory Management System — Stock Control Requirements
+
+Functional Requirements
+
+1. The system shall allow warehouse staff to receive goods by scanning barcodes or QR codes and recording quantity, supplier, batch number, and expiry date.
+2. When stock for any product falls below its defined reorder point, the system shall automatically generate a purchase order and notify the procurement team within 15 minutes.
+3. A stock item transitions from 'In Transit' to 'Received' upon goods receipt confirmation; to 'Quarantined' if quality inspection fails; and to 'Available' upon inspection clearance.
+4. Only users with the 'Warehouse Manager' or 'Inventory Auditor' role may perform stock adjustments outside of standard receive/dispatch operations.
+5. Each inventory transaction record must contain: transaction_id (UUID), product_id (UUID), transaction_type (enum: Receive|Dispatch|Adjustment|Return), quantity (integer), unit_of_measure (string), timestamp (ISO 8601), and performed_by (UUID).
+6. The system shall integrate with the ERP system via REST API to synchronize stock levels every 15 minutes; discrepancies greater than 5% must trigger an alert.
+7. Barcode scanning operations must register within 500 milliseconds to support fast-paced warehouse workflows.
+8. The system should make it easy to manage stock effectively.
+9. FIFO (First-In, First-Out) dispatch logic must be enforced for all perishable goods; the system shall automatically select the oldest batch for dispatch.
+10. Only items that have passed quality inspection may be marked as 'Available' and dispatched to fulfillment.
+11. Each product record must include: product_id (UUID), SKU (string, unique, max 20 characters), product_name (string), category (string), reorder_point (integer), reorder_quantity (integer), and storage_zone (string).
+12. The system shall generate a daily inventory valuation report using FIFO costing and deliver it to the finance team by 06:00 each morning.
+13. Cycle counts must be scheduled by the system for each storage zone on a rotating basis; discrepancies found during cycle counts must be recorded and investigated within 48 hours.
+14. The system shall enforce storage zone capacity limits; any attempt to receive goods into a zone at 100% capacity must be rejected with a descriptive error.
+15. Expired goods must be automatically flagged and moved to 'Quarantined' status 3 days before expiry; disposal must be approved by the Warehouse Manager.
+16. The system shall maintain a full audit trail of all stock movements with actor identity, timestamp, and before/after quantity.
+17. The system should optimize space utilization in the warehouse.
+18. Return merchandise authorizations (RMAs) must capture: reason code, condition of returned goods, and originating order reference.
+19. The system shall support multi-location warehousing; stock queries must be filterable by warehouse, zone, aisle, and shelf.
+20. Annual physical inventory counts must produce a variance report comparing system quantities to physical counts; all variances must be reconciled before the financial year close.

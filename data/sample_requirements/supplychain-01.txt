@@ -1,0 +1,25 @@
+Supply Chain Management System — Procurement and Supplier Requirements
+
+Functional Requirements
+
+1. The system shall allow procurement officers to create purchase orders by selecting items from the approved vendor catalog, specifying quantities, delivery dates, and shipping addresses.
+2. When a purchase order is approved, the system shall transmit it to the supplier via EDI or email within 15 minutes and record the expected delivery date.
+3. A purchase order transitions from 'Draft' to 'Pending Approval' when submitted; to 'Approved' when authorized; to 'Sent to Supplier' once transmitted; to 'Partially Received' when some items arrive; and to 'Fully Received' when all items are received.
+4. Only the 'Procurement Manager' or 'CFO' may approve purchase orders exceeding $100,000.
+5. Each purchase order record must contain: po_id (UUID), supplier_id (FK), line_items (JSON array), total_value (decimal), currency (ISO 4217), requested_delivery_date (ISO 8601 date), approved_by (FK, nullable), and status (enum).
+6. The system shall integrate with supplier EDI systems using the EDIFACT X12 850 standard for purchase order transmission.
+7. Purchase order approval workflows must route to the correct approver within 5 minutes of submission.
+8. The system should help the company save money on procurement.
+9. Three-way matching must be enforced before invoice payment: the invoice must match the purchase order and the goods receipt within a 5% tolerance.
+10. Only approved vendors on the vendor master list may receive purchase orders; new vendors must complete a qualification process before being added to the master list.
+11. Each supplier record must contain: supplier_id (UUID), company_name (string), contact_email (string), payment_terms (string), currency (ISO 4217), tax_id (string), and compliance_status (enum: Qualified|Probation|Disqualified).
+12. The system shall track supplier delivery performance: on-time delivery rate, order accuracy rate, and defect rate; suppliers with on-time delivery below 85% must be flagged for review.
+13. Inventory replenishment orders must be triggered automatically when stock falls below the safety stock level defined per SKU.
+14. The system shall calculate total cost of ownership (TCO) for each supplier per category, including unit price, freight, duties, and quality costs.
+15. Goods receipt notes must be created within 24 hours of physical goods arrival; late GRNs must be flagged to the warehouse manager.
+16. All procurement documents must be retained for 7 years in compliance with corporate audit requirements.
+17. The system should improve supplier relationships.
+18. The system shall generate a monthly spend analysis report by supplier, category, and cost center for the finance team.
+19. Contract expiry alerts must be sent to the procurement team 90 days, 60 days, and 30 days before each supplier contract expiration date.
+20. The system shall enforce budget controls; purchase orders that would exceed the approved budget for a cost center must be flagged and require CFO approval.
+21. Supplier invoices must be processed and approved within 15 business days; invoices outstanding beyond this must trigger an escalation alert.

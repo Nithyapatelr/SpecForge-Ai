@@ -1,0 +1,25 @@
+Smart Home IoT Platform — Device Management Requirements
+
+Functional Requirements
+
+1. The system shall allow homeowners to pair smart devices (lights, locks, thermostats, cameras) by scanning a QR code or entering a device pairing code in the mobile app.
+2. When a door lock device reports a 'forced entry' event, the system shall immediately send push notifications to all household members and the designated emergency contact.
+3. A device transitions from 'Unpaired' to 'Paired' after successful pairing; to 'Offline' if no heartbeat is received for 5 minutes; and to 'Error' if the device reports a hardware fault.
+4. Only the 'Home Owner' account may add, remove, or rename devices; 'Guest' accounts may only control devices they have been explicitly granted access to.
+5. Each device record must contain: device_id (UUID), device_type (enum), mac_address (string, unique), firmware_version (string), paired_at (ISO 8601), and status (enum: Paired|Offline|Error|Unpaired).
+6. The system shall integrate with Amazon Alexa and Google Home via their respective Smart Home APIs to enable voice control of all paired devices.
+7. Device command execution (e.g., turn on light) must complete end-to-end within 1 second for 99% of commands.
+8. The system should make homes smarter and more energy efficient.
+9. Automation rules shall be evaluated in priority order; if two rules conflict, the higher-priority rule shall take precedence and a conflict notification shall be sent to the homeowner.
+10. Only devices with firmware version 3.0.0 or above may be enrolled in the platform; older firmware devices must be prompted to update before pairing.
+11. Each automation rule must include: rule_id (UUID), trigger_condition (JSON), action (JSON), priority (integer 1-100), and is_active (boolean).
+12. The system shall store 30 days of device event history; events older than 30 days shall be purged unless the user has a Premium subscription (1-year retention).
+13. Energy consumption data from smart plugs and thermostats must be aggregated hourly and displayed as daily, weekly, and monthly charts.
+14. Camera livestream must begin within 3 seconds of the homeowner tapping the camera tile in the app.
+15. All video streams must be encrypted end-to-end; raw video must never pass through the platform's servers unencrypted.
+16. The system shall perform automatic firmware over-the-air (OTA) updates during a maintenance window (02:00–04:00 local time) after homeowner approval.
+17. The system should give good notifications.
+18. Guest access permissions must expire automatically at a configured date and time; expired guest accounts must have all device control permissions revoked.
+19. The platform must support geofencing; when the homeowner's phone leaves the defined home area, the system shall automatically arm the security devices and lock all doors.
+20. The system shall send a weekly energy report every Sunday summarizing energy saved compared to the previous week.
+21. Multiple homes may be managed under a single account; device namespaces must be isolated per property.

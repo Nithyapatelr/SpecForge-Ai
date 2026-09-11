@@ -1,0 +1,25 @@
+Flight Booking System — Reservation and Ticketing Requirements
+
+Functional Requirements
+
+1. The system shall allow customers to search for available flights by specifying origin, destination, departure date, return date (optional), number of passengers, and cabin class.
+2. When a booking is confirmed, the system shall issue an e-ticket with a unique PNR within 30 seconds and send it to the customer's registered email.
+3. A booking transitions from 'Hold' to 'Confirmed' upon payment; to 'Checked In' when the passenger completes online check-in; to 'Boarded' upon gate scan; and to 'Cancelled' if the booking is cancelled before departure.
+4. Only 'Airline Staff' and 'Travel Agency' roles may access bulk booking management and apply corporate fare rates.
+5. Each booking record must contain: pnr (string, 6 alphanumeric), booking_id (UUID), flight_id (FK), passenger details (array), cabin_class (enum: Economy|Business|First), seat_numbers (array), total_fare (decimal), taxes (decimal), and status (enum).
+6. The system shall integrate with the GDS (Global Distribution System) Amadeus API for real-time seat availability and fare retrieval.
+7. Flight search results must be returned within 3 seconds for any origin-destination pair.
+8. The booking flow should be simple and quick for travelers.
+9. Seat selection must lock the selected seat for 10 minutes while the customer completes payment; if payment is not completed, the lock must be released and the seat made available again.
+10. Only passengers who have completed check-in may access the boarding pass; boarding pass QR codes must expire 30 minutes after the scheduled departure.
+11. Baggage allowance rules must be enforced per cabin class and fare type; additional baggage fees must be calculated and added to the total before payment.
+12. Flight cancellation by the airline must trigger automatic rebooking offers or full refund options to all affected passengers within 2 hours.
+13. The system shall calculate the cheapest available fare combination for multi-city itineraries across all available airlines in the GDS.
+14. Online check-in must open 48 hours before scheduled departure and close 1 hour before departure.
+15. All customer passport and ID data must be encrypted at rest using AES-256 and transmitted only over TLS 1.3.
+16. The system shall enforce IATA name change rules; name corrections of up to 3 characters may be processed by airline staff; full name changes are not permitted on non-refundable tickets.
+17. The system should give good deals and discounts to loyal customers.
+18. Loyalty points must be credited to the customer's frequent flyer account within 48 hours of flight completion, based on the fare type and distance flown.
+19. The system shall generate and submit passenger manifest data to the relevant government authority as required by APIS regulations, 60 minutes before departure.
+20. Refund processing for eligible cancellations must be initiated within 24 hours and completed within 7 business days.
+21. The system shall support group bookings of 10 or more passengers with negotiated group fares; group booking requests must be reviewed by an airline staff member.

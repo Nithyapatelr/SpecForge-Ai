@@ -1,0 +1,25 @@
+Government Tax Filing Portal — Submission and Assessment Requirements
+
+Functional Requirements
+
+1. The system shall allow registered taxpayers to file annual income tax returns online by entering income sources, deductions, exemptions, and uploading supporting documents.
+2. When a tax return is submitted, the system shall validate completeness and consistency of the data and send an acknowledgment with a submission reference number within 10 minutes.
+3. A tax return transitions from 'Submitted' to 'Under Processing' when assigned to an assessor; to 'Assessment Issued' when the tax liability is computed; to 'Objection Filed' if the taxpayer disputes the assessment; and to 'Finalized' upon agreement or adjudication.
+4. Only 'Tax Assessors' may issue formal tax assessments; 'Tax Officers' may process routine returns but must escalate complex cases.
+5. Each tax return record must contain: return_id (UUID), taxpayer_id (FK), tax_year (integer), filing_date (ISO 8601 date), total_income (decimal), total_deductions (decimal), taxable_income (decimal), tax_liability (decimal), and status (enum).
+6. The system shall integrate with the national financial institution reporting API to pre-populate interest and dividend income fields using bank-reported data.
+7. Tax calculation engine must compute liability for any return within 5 seconds.
+8. The system should make tax filing easier for ordinary citizens.
+9. Taxpayers who miss the filing deadline must be automatically assessed a late filing penalty calculated at 5% of unpaid tax per month, up to a maximum of 25%.
+10. Only a 'Senior Tax Assessor' may approve waivers for late filing penalties; standard assessors may not grant waivers.
+11. Each assessment record must contain: assessment_id (UUID), return_id (FK), assessor_id (FK), assessed_tax (decimal), penalty (decimal), interest (decimal), total_due (decimal), and issued_at (ISO 8601).
+12. The system shall calculate interest on overdue tax at the statutory rate (currently 1% per month) compounding monthly from the original due date.
+13. Tax refunds due to taxpayers must be processed and credited to the registered bank account within 30 business days of assessment finalization.
+14. The system shall enforce audit selection rules; returns with deductions exceeding 30% of gross income must be flagged for mandatory audit.
+15. All taxpayer records and return data must be retained for 10 years in compliance with the Revenue Code.
+16. Objections to assessments must be submitted within 30 days of the assessment date; the system must enforce this deadline and reject late objections.
+17. The system should help the government collect the right amount of taxes.
+18. The system shall generate an annual tax collection report by income bracket, industry sector, and geographic region for the Finance Ministry.
+19. All access to taxpayer financial records must be logged with assessor identity, timestamp, and purpose; unauthorized access must trigger an immediate alert.
+20. The system shall send payment due reminders 30 days, 14 days, and 3 days before the tax payment deadline.
+21. The e-payment gateway must accept bank transfers, credit/debit cards, and government payment vouchers; payments must be reconciled against the taxpayer account within 1 business day.

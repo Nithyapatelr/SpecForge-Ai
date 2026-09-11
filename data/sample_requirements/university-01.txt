@@ -1,0 +1,26 @@
+University Student Enrollment System — Registration Requirements
+
+Functional Requirements
+
+1. The system shall allow prospective students to submit undergraduate and postgraduate applications online with academic transcripts, personal statements, and reference letters.
+2. When a student's application is received, the system shall send an acknowledgment email with a unique application reference number within 10 minutes.
+3. An application transitions from 'Submitted' to 'Under Review' when an admissions officer opens it; to 'Conditional Offer' or 'Rejected' after evaluation; to 'Accepted' when the student confirms acceptance; and to 'Enrolled' on the course start date.
+4. Only 'Admissions Officers' and 'Academic Deans' may change an application status to 'Accepted' or 'Rejected'.
+5. Each student record must contain: student_id (UUID), national_id (encrypted string), full_name (string), date_of_birth (ISO 8601 date), program_id (FK), enrollment_status (enum), and academic_year (integer).
+6. The system shall integrate with the national student loan authority API to automatically verify financial aid eligibility upon enrollment confirmation.
+7. The course registration portal must handle 5,000 concurrent users during peak enrollment periods without degrading response time beyond 3 seconds.
+8. The system should help students choose courses that are good for their career.
+9. A student may register for a maximum of 6 courses per semester; the system shall reject any registration exceeding this limit.
+10. Only a student who has paid the semester fee or has an approved payment deferral may register for courses.
+11. Prerequisites must be enforced automatically; the system shall reject course registration if the student has not completed all listed prerequisites.
+12. The academic transcript must be generated in PDF format and digitally signed; it must be available for download within 60 seconds of the request.
+13. Grades submitted by faculty must be locked 5 business days after the grade submission deadline; locked grades may only be modified by the Registrar.
+14. The system shall send enrollment deadline reminder notifications to all students who have not yet registered, 14 days, 7 days, and 1 day before the deadline.
+15. All student financial records must be retained for 10 years in compliance with government auditing requirements.
+16. The timetable scheduling engine must detect and prevent course time conflicts for a student's registered courses.
+17. The system should be easy to use for students with no technical background.
+18. Faculty must be able to upload course materials (PDF, PPTX, MP4) up to 500 MB per file to the course LMS.
+19. The system shall calculate and publish semester GPA and cumulative GPA for each student within 24 hours of all grade submissions being finalized.
+20. Student data must be processed in compliance with FERPA regulations; access to records must be logged with accessor identity and timestamp.
+21. The scholarship matching engine shall evaluate all enrolled students against available scholarship criteria and auto-apply where all conditions are met.
+22. The system shall generate an accreditation report summarizing enrollment statistics, course completion rates, and faculty-to-student ratios annually.

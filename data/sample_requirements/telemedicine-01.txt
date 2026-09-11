@@ -1,0 +1,25 @@
+Telemedicine Platform — Virtual Consultation Requirements
+
+Functional Requirements
+
+1. The system shall allow patients to book virtual consultations with licensed physicians by selecting specialty, preferred time slot, and consultation type (video, audio, or chat).
+2. When a consultation is booked, the system shall send the patient and physician a calendar invite with a unique secure video link 24 hours and 1 hour before the scheduled time.
+3. A consultation transitions from 'Scheduled' to 'In Progress' when the physician opens the video room; to 'Completed' when the physician closes the session and submits clinical notes; to 'No Show' if the patient does not join within 10 minutes of the scheduled start.
+4. Only licensed physicians with verified credentials may conduct consultations; credential verification must be renewed annually.
+5. Each consultation record must contain: consultation_id (UUID), patient_id (FK), physician_id (FK), scheduled_at (ISO 8601), duration_minutes (integer), consultation_type (enum), diagnosis_code (ICD-10), prescription_id (UUID, nullable), and status (enum).
+6. The system shall integrate with WebRTC for video and audio streaming; if WebRTC quality degrades below acceptable threshold, the system must notify both parties and offer to switch to audio-only.
+7. Video call connection must be established within 5 seconds of both parties joining the room.
+8. The system should give patients access to good healthcare.
+9. Physicians must complete and lock their consultation notes within 24 hours of session completion; late note completion must be flagged to the medical director.
+10. Only the treating physician and the patient's designated care team may view consultation notes; unauthorized access attempts must be logged and flagged.
+11. Electronic prescriptions issued during a consultation must be digitally signed by the physician and transmitted to the patient's chosen pharmacy via the e-prescribing network within 5 minutes.
+12. The system shall enforce state-specific telehealth prescribing regulations; physicians may not prescribe controlled substances via telemedicine in states where it is prohibited.
+13. Patient wait time in the virtual waiting room must not exceed 15 minutes; if exceeded, the patient must be offered a reschedule or a same-day alternate physician.
+14. All consultation video recordings (if consented) must be encrypted at rest and at transit; recordings must be retained for 7 years per HIPAA requirements.
+15. The system shall generate and deliver itemized billing statements to patients within 24 hours of consultation completion.
+16. Insurance eligibility verification must be completed automatically before the consultation starts using the patient's insurance details and the payer verification API.
+17. The system should improve access to healthcare in rural areas.
+18. The physician availability calendar must reflect real-time slot availability; double-booking must be prevented by the system.
+19. Patient consent for the consultation, recording, and data sharing must be obtained and recorded digitally before the session begins.
+20. The system shall send prescription pickup reminders to the patient 2 hours after the prescription is transmitted to the pharmacy.
+21. Platform uptime must be 99.9% during peak hours (08:00–22:00 local time); scheduled maintenance must be performed between 02:00–04:00.

@@ -1,0 +1,27 @@
+Food Delivery Platform — Order and Delivery Requirements
+
+Functional Requirements
+
+1. The system shall allow customers to browse restaurants by cuisine type, rating, delivery time estimate, and minimum order amount.
+2. When a customer places a food order, the system shall notify the restaurant within 10 seconds and wait for the restaurant to confirm before showing the customer a confirmed ETA.
+3. An order transitions from 'Placed' to 'Confirmed' when the restaurant accepts; to 'Preparing' when preparation starts; to 'Ready for Pickup' when the restaurant marks it ready; to 'Out for Delivery' when a rider picks up; and to 'Delivered' when the rider marks delivery complete.
+4. Only users with the 'Restaurant Manager' role may update the restaurant's menu, operating hours, and delivery radius settings.
+5. Each order record must contain: order_id (UUID), customer_id (UUID), restaurant_id (UUID), rider_id (UUID, nullable), items (JSON array), subtotal (decimal), delivery_fee (decimal), total (decimal), placed_at (ISO 8601), and status (enum).
+6. The system shall integrate with Google Maps API for real-time rider location tracking and ETA updates every 30 seconds.
+7. Order confirmation must be delivered to the customer within 15 seconds of placement for 98% of orders.
+8. Deliveries should arrive as fast as possible.
+9. The platform shall enforce a maximum delivery radius of 10 km per restaurant; orders from customers outside this radius must be rejected with a descriptive message.
+10. Only riders who have completed background checks and received food handling certification may be assigned delivery orders.
+11. Restaurants must specify preparation time per menu item; the system shall calculate estimated total preparation time at order placement.
+12. Customers may cancel an order without penalty within 2 minutes of placement; cancellation after restaurant confirmation shall incur a $1.50 cancellation fee.
+13. The delivery fee must be calculated as: base_fee + (per_km_rate * distance_beyond_2km); orders above $30 qualify for free delivery.
+14. Customer ratings submitted for a completed delivery must be stored and factored into the restaurant's and rider's rolling 30-day average rating.
+15. Promo codes must not be stackable; applying a second promo code must replace the first and notify the customer.
+16. If no rider accepts a delivery within 10 minutes of the restaurant marking the order 'Ready for Pickup', the system must alert the dispatch team.
+17. The system should have a nice interface for customers.
+18. Allergy information must be displayed prominently on each menu item; customers must be able to filter menu items by allergen.
+19. All customer payment data must be processed through a PCI-DSS compliant payment gateway; the platform must not store raw card data.
+20. The system shall generate a weekly payout report for restaurants summarizing total orders, gross revenue, platform commission, and net payout.
+21. Restaurant onboarding must verify the restaurant's food safety license and business registration before activating the account.
+22. The system shall support scheduled orders up to 7 days in advance; scheduled orders must be activated 30 minutes before the requested delivery time.
+23. Peak hour surge delivery fees (1.25x multiplier) must be disclosed to the customer at checkout and require explicit customer acknowledgment.

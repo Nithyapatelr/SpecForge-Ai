@@ -1,0 +1,24 @@
+Restaurant Point-of-Sale System — Order and Billing Requirements
+
+Functional Requirements
+
+1. The system shall allow servers to create table orders by selecting menu items, specifying quantities, and adding modifiers (e.g., 'no onions', 'extra sauce').
+2. When an order is submitted by a server, the system shall print kitchen tickets on the appropriate kitchen display system (KDS) or kitchen printer within 5 seconds.
+3. An order transitions from 'Open' to 'Sent to Kitchen' when submitted; to 'Ready' when the kitchen marks it complete; to 'Served' when the server confirms delivery to the table; and to 'Paid' upon settlement.
+4. Only users with the 'Manager' role may void items or apply discounts exceeding 20% to an order.
+5. Each order record must contain: order_id (UUID), table_number (integer), server_id (FK), items (JSON array with item_id, quantity, modifiers, unit_price), subtotal (decimal), tax (decimal), total (decimal), and status (enum).
+6. The system shall integrate with the inventory management system via API to decrement ingredient stock quantities in real time as orders are placed.
+7. Kitchen order ticket printing must complete within 3 seconds of order submission.
+8. The POS system should make service faster for customers.
+9. Split billing must support splitting the total equally among up to 8 guests or splitting by individual item selection; each split must be settled independently.
+10. Only the 'Cashier' and 'Manager' roles may process payments; servers may take orders but may not access the payment screen.
+11. Each payment record must contain: payment_id (UUID), order_id (FK), payment_method (enum: Cash|Card|Voucher|Mobile), amount_paid (decimal), change_given (decimal, applicable for cash), and processed_at (ISO 8601).
+12. The system shall calculate tax based on the configured tax profile per menu category; mixed-tax orders must be itemized per tax rate on the receipt.
+13. Happy hour pricing must be enforced automatically between configured times; the system must revert to standard pricing outside happy hour without manual intervention.
+14. The end-of-day (EOD) report must reconcile total orders, total revenue by payment method, voids, discounts, and tips; it must be available within 5 minutes of day close.
+15. The system shall operate in offline mode for up to 4 hours if the internet connection is lost; all offline transactions must sync to the central system when connectivity is restored.
+16. Menu items marked as 'Out of Stock' must be visually indicated on the POS screen and must not be orderable.
+17. The system should help the restaurant make more profit.
+18. Loyalty points must be credited to the customer's account at the rate of 1 point per $1 spent after payment is processed.
+19. The system shall support reservations; reserved tables must be blocked on the floor map for the reservation period plus 15 minutes.
+20. All financial transactions must be logged with server_id, manager_id (if override applied), timestamp, and amount for audit purposes.

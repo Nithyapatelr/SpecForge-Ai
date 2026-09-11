@@ -1,0 +1,25 @@
+Event Management Platform — Registration and Ticketing Requirements
+
+Functional Requirements
+
+1. The system shall allow event organizers to create events by entering event name, description, venue, date, time, ticket types, and pricing.
+2. When an attendee registers for a paid event, the system shall process payment, generate a unique QR code ticket, and send a confirmation email within 2 minutes.
+3. A ticket transitions from 'Reserved' to 'Purchased' upon payment confirmation; to 'Checked In' when scanned at the event gate; to 'Cancelled' if the attendee cancels; and to 'Refunded' upon successful refund.
+4. Only users with the 'Event Organizer' role may create, edit, cancel, or transfer event ownership; 'Staff' roles may manage check-in operations only.
+5. Each ticket record must contain: ticket_id (UUID), event_id (FK), attendee_id (FK), ticket_type (string), qr_code (string, unique), purchase_price (decimal), purchased_at (ISO 8601), and status (enum).
+6. The system shall integrate with Stripe and PayPal for payment processing; the organizer may configure their preferred gateway per event.
+7. QR code scanning at event check-in must validate and update status within 1 second.
+8. Event registration should be quick and easy for attendees.
+9. Waitlist functionality must activate automatically when an event reaches 100% ticket capacity; waitlisted attendees must be offered available tickets within 15 minutes of a cancellation.
+10. Only organizers with a verified bank account may receive payouts; payout must be processed within 5 business days of event completion.
+11. Each event record must contain: event_id (UUID), organizer_id (FK), name (string, max 255), venue_address (JSON), start_datetime (ISO 8601), end_datetime (ISO 8601), capacity (integer), and status (enum: Draft|Published|Cancelled|Completed).
+12. Event cancellation by the organizer must trigger automatic full refunds to all ticket holders within 5 business days.
+13. The system shall enforce ticket transfer rules: tickets may be transferred to another attendee up to 24 hours before the event; the transferee must register on the platform.
+14. Discount codes must be validated at checkout; the maximum discount per ticket must not exceed 50% of the face value.
+15. All event financial data must be retained for 7 years for tax and audit compliance.
+16. The system shall generate a post-event analytics report: total registrations, check-in rate, revenue by ticket type, and attendee satisfaction survey summary.
+17. The system should help organizers create successful events.
+18. Attendee data (name, email, dietary preferences) must be exportable by organizers in CSV format per event; the export must complete within 30 seconds.
+19. The system shall support recurring events; organizers may define a recurrence pattern and the system shall auto-create event instances for the next 12 months.
+20. On-site badge printing must be triggered automatically upon successful QR code scan at designated badge printing stations.
+21. The platform must provide a live attendee count dashboard visible to event staff, updating in real time as check-ins occur.

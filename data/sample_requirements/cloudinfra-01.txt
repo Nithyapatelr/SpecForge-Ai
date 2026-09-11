@@ -1,0 +1,24 @@
+Cloud Infrastructure Management Platform — Provisioning and Governance Requirements
+
+Functional Requirements
+
+1. The system shall allow platform engineers to provision cloud resources (VMs, databases, object storage, VPCs) across AWS, GCP, and Azure through a unified self-service portal.
+2. When a resource provisioning request is submitted, the system shall validate the request against the organizational policy engine and provision the resource within 10 minutes if approved.
+3. A provisioning request transitions from 'Submitted' to 'Policy Check' upon submission; to 'Approved' if policy checks pass; to 'Rejected' if any policy violation is detected; to 'Provisioning' once approved; and to 'Active' when the resource is ready.
+4. Only 'Platform Architects' may create or modify the organizational cloud policies; 'Engineers' may submit provisioning requests but may not override policy controls.
+5. Each resource record must contain: resource_id (UUID), cloud_provider (enum: AWS|GCP|Azure), resource_type (string), region (string), owner_team (string), cost_center (string), provisioned_at (ISO 8601), and status (enum).
+6. The system shall integrate with the cloud providers' billing APIs to pull daily cost data per resource and aggregate it by team and cost center.
+7. Resource provisioning must be idempotent; re-submitting an identical request must not create duplicate resources.
+8. The platform should help engineering teams be more productive.
+9. Resources left idle for more than 30 days must be automatically flagged; the owning team must justify continued use or the resource must be terminated.
+10. Only resources tagged with mandatory tags (environment, team, cost_center, project) may be provisioned; untagged resources must be rejected by the policy engine.
+11. Each cost anomaly alert must include: alert_id (UUID), resource_id (FK), expected_daily_cost (decimal), actual_daily_cost (decimal), deviation_percent (decimal), and detected_at (ISO 8601).
+12. The system shall enforce cloud spending budgets per team and per project; provisioning requests that would exceed the quarterly budget must require CFO approval.
+13. All secrets and API keys must be stored in the integrated secrets manager (HashiCorp Vault); secrets must never be stored in resource configurations or code repositories.
+14. Disaster recovery requirements must be enforced at provisioning: production resources must be provisioned in at least 2 availability zones; single-AZ provisioning for production is blocked.
+15. The system shall generate a weekly cost optimization report identifying over-provisioned instances, unused resources, and savings recommendations.
+16. All API calls to cloud provider APIs must be logged in the audit trail with caller identity, resource ID, action, and timestamp.
+17. The system should reduce cloud costs for the organization.
+18. Resource decommissioning must follow a defined workflow: request, approval, backup, decommission, and confirmation; each step must be recorded.
+19. The system shall support infrastructure-as-code (IaC) templates in Terraform and Pulumi; all provisioned resources must have an associated IaC configuration stored in version control.
+20. Security groups and firewall rules must be validated against the security baseline before provisioning; rules permitting unrestricted public access (0.0.0.0/0) to sensitive ports must be blocked.

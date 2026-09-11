@@ -1,0 +1,25 @@
+Legal Case Management System — Matter and Document Requirements
+
+Functional Requirements
+
+1. The system shall allow attorneys to create legal matters by entering client information, matter type, jurisdiction, opposing counsel details, and relevant court deadlines.
+2. When a new matter is created, the system shall generate a unique matter number and notify the assigned paralegal and billing coordinator within 30 minutes.
+3. A matter transitions from 'Open' to 'In Litigation' when a court filing is recorded; to 'Settled' when a settlement agreement is uploaded and approved by the partner; to 'Closed' upon final billing reconciliation.
+4. Only attorneys with the 'Supervising Partner' role may close a matter; paralegals and associates may update matter details but not change status to 'Closed'.
+5. Each matter record must contain: matter_id (UUID), client_id (FK), matter_number (string, unique), matter_type (enum), jurisdiction (string), opened_date (ISO 8601 date), assigned_attorney_id (FK), billable_hours (decimal), and status (enum).
+6. The system shall integrate with the court e-filing portal API to submit legal documents directly; submission receipts must be stored against the matter record.
+7. Document uploads must complete within 5 seconds for files up to 50 MB.
+8. The system should make legal work more organized and efficient.
+9. Conflict-of-interest checks must be run automatically when a new client is onboarded; if a conflict is detected, the matter must be flagged and the Supervising Partner notified before the matter can proceed.
+10. Only the attorney and paralegal assigned to a matter may view its confidential documents; firm administrators may view metadata only.
+11. Each time entry must include: time_entry_id (UUID), matter_id (FK), attorney_id (FK), activity_code (string), description (string, max 1000 characters), hours (decimal, 2 decimal places), billing_rate (decimal), and billable (boolean).
+12. The system shall automatically calculate billable fees as: hours * billing_rate for each time entry; invoices must be generated monthly and approved by the billing partner before sending.
+13. Court deadline reminders must be sent 30 days, 14 days, 7 days, and 1 day before each deadline to all attorneys and paralegals on the matter.
+14. The system shall enforce document version control; every document edit must create a new version; previous versions must be accessible and labeled with editor identity and timestamp.
+15. All matter and client records must be retained for 7 years after matter closure in compliance with bar association rules.
+16. The system shall generate a utilization report showing billable vs. non-billable hours by attorney for the billing partner every Monday.
+17. The system should be helpful for lawyers and their clients.
+18. Client intake forms must capture conflict-check fields including client name, opposing party names, and related entity names.
+19. The system shall enforce trust accounting rules: client funds in trust accounts must never be commingled with firm operating funds; all trust transactions must be double-entry recorded.
+20. Expense entries must capture: expense type, amount, currency, vendor, date, and whether the expense is client-billable.
+21. Only a Supervising Partner may write off time entries or reduce an invoice amount by more than 10%.

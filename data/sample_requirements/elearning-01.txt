@@ -1,0 +1,27 @@
+Online Learning Platform — Course and Progress Requirements
+
+Functional Requirements
+
+1. The system shall allow instructors to create courses by uploading video lessons, quizzes, assignments, and supplementary materials organized into sections and modules.
+2. When a student enrolls in a paid course, the system shall process payment, grant immediate access to course content, and send an enrollment confirmation email.
+3. A course transitions from 'Draft' to 'Published' when the instructor submits it for review and an admin approves it; to 'Archived' when the instructor retires it.
+4. Only users with the 'Content Admin' role may approve or reject course submissions; instructors may not approve their own courses.
+5. Each course record must contain: course_id (UUID), instructor_id (FK), title (string, max 255), description (text), price (decimal), difficulty_level (enum: Beginner|Intermediate|Advanced), language (ISO 639-1), and status (enum).
+6. The system shall integrate with Vimeo API for secure video hosting; video playback URLs must be signed and expire after 4 hours.
+7. Video lessons must begin playback within 3 seconds of the student clicking play for 95% of requests.
+8. Students should be able to learn at their own pace easily.
+9. Quiz attempts must be limited to 3 per student per quiz; after 3 failed attempts, the student must wait 24 hours before retrying.
+10. Only students who have completed all prerequisite modules may unlock advanced modules; the system must enforce this sequentially.
+11. Each quiz submission record must contain: submission_id (UUID), student_id (FK), quiz_id (FK), answers (JSON), score (decimal), passed (boolean), submitted_at (ISO 8601), and attempt_number (integer).
+12. Course completion certificates must be auto-generated and emailed to students who achieve a passing score (70% or above) on all course assessments.
+13. The system shall track and display video watch progress per lesson; a lesson is marked as 'Completed' only when 90% of the video has been watched.
+14. Instructors shall receive 70% of each course sale as royalties; the platform retains 30% commission; payouts must be processed monthly.
+15. Course reviews may only be submitted by students who have completed at least 50% of the course content.
+16. The system shall recommend courses to students based on their enrolled categories, completion history, and skill level using a collaborative filtering model.
+17. The platform should motivate students to keep learning.
+18. Student discussion forum posts must be moderated; posts flagged by 3 or more peers must be reviewed by a moderator within 24 hours.
+19. The system shall support subtitles in at least 10 languages for all video lessons; subtitle files must be in SRT format.
+20. All financial transactions must be logged with instructor_id, course_id, amount, platform_fee, instructor_payout, and transaction_date.
+21. Refund requests submitted within 30 days of purchase and with less than 30% of course content consumed must be automatically approved.
+22. The system shall send a weekly progress report to enrolled students summarizing lessons completed, quiz scores, and time spent learning.
+23. Instructor analytics dashboards must display total enrollments, revenue, average rating, and completion rate per course.

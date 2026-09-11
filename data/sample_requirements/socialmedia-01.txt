@@ -1,0 +1,26 @@
+Social Media Platform — Content and Community Requirements
+
+Functional Requirements
+
+1. The system shall allow registered users to create posts containing text (max 5,000 characters), images (max 10 per post, each up to 10 MB), and videos (max 500 MB per video).
+2. When a user publishes a post, the system shall distribute it to all followers' feeds within 30 seconds for accounts with fewer than 10,000 followers.
+3. A post transitions from 'Draft' to 'Published' when the user submits it; to 'Flagged' if automated moderation detects a policy violation; to 'Removed' if a moderator confirms the violation.
+4. Only users with the 'Content Moderator' role may change a post's status to 'Removed'; automated systems may change status to 'Flagged' only.
+5. Each user account record must contain: user_id (UUID), username (string, unique, max 30 characters), email (string, unique), hashed_password (string), date_of_birth (ISO 8601 date), account_status (enum), and created_at (ISO 8601).
+6. The system shall integrate with Microsoft Azure Content Moderator API to scan all images and videos for prohibited content within 60 seconds of upload.
+7. The news feed must load within 1.5 seconds for 95% of users.
+8. The platform should encourage meaningful social interactions.
+9. Users under 13 years of age must not be permitted to create accounts; date of birth must be verified at registration.
+10. Only account owners and designated administrators may delete posts; deleted posts must be retained in a soft-delete state for 30 days before permanent deletion.
+11. Each direct message must contain: message_id (UUID), sender_id (FK), recipient_id (FK), content (encrypted text), sent_at (ISO 8601), read_at (ISO 8601, nullable), and is_deleted (boolean).
+12. The recommendation algorithm shall surface content based on the user's interaction history, follow graph, and trending topics within their interest graph.
+13. Users must be able to block other users; blocked users must not be able to view the blocker's profile, posts, or send direct messages.
+14. Two-factor authentication must be enforced for all accounts with more than 100,000 followers.
+15. All direct messages must be encrypted end-to-end; the platform must not have access to message plaintext.
+16. The system shall apply rate limiting to all API endpoints: authenticated users may make up to 1,000 requests per hour; unauthenticated requests are limited to 100 per hour.
+17. The platform should have good tools for content creators.
+18. Hashtags must be indexed in real time; trending hashtags must be recalculated every 15 minutes based on post volume in the past hour.
+19. User-generated audio and video content must be scanned for copyright violations using the configured audio fingerprinting service before publication.
+20. The system shall provide advertisers with campaign analytics including impressions, click-through rate, engagement rate, and conversion tracking.
+21. Account deletion requests must be processed within 30 days; all personal data must be purged in compliance with GDPR Article 17.
+22. Stories (ephemeral posts) must automatically expire and be deleted 24 hours after publication.

@@ -1,0 +1,26 @@
+Ride-Sharing Application — Booking and Driver Requirements
+
+Functional Requirements
+
+1. The system shall allow registered riders to request a ride by providing pickup and drop-off locations; the system must show estimated fare and ETA before confirmation.
+2. When a ride is requested, the system shall broadcast the request to available drivers within a 3 km radius and assign the first driver who accepts within 30 seconds.
+3. A ride transitions from 'Requested' to 'Accepted' when a driver accepts; to 'In Progress' when the driver marks arrival and starts the trip; to 'Completed' when the driver ends the trip; and to 'Cancelled' if either party cancels before trip start.
+4. Only users with the 'Fleet Manager' role may view real-time GPS locations of all active drivers.
+5. Each ride record must contain: ride_id (UUID), rider_id (UUID), driver_id (UUID), pickup_coordinates (lat/lon decimal), dropoff_coordinates (lat/lon decimal), requested_at (ISO 8601), fare_amount (decimal, 2 decimal places), and status.
+6. The system shall integrate with Google Maps API for route calculation and ETA; if unavailable, it shall fall back to OpenStreetMap Routing API.
+7. Driver matching must complete within 5 seconds for 95% of ride requests.
+8. The app should feel smooth and responsive for drivers and riders.
+9. Surge pricing shall activate automatically when demand exceeds supply by more than 1.5x in a given zone; the system must display the surge multiplier prominently to the rider before booking confirmation.
+10. Only a verified driver with a valid license, insurance, and background check clearance may receive ride assignments.
+11. The system shall calculate driver earnings by applying the platform commission rate (15%) to the base fare and crediting the net amount to the driver's wallet daily at midnight.
+12. If a driver does not accept or decline a ride within 20 seconds, the system shall automatically pass the request to the next available driver.
+13. The fare must be calculated using: base_fare + (per_km_rate * distance) + (per_minute_rate * duration) + applicable_surge_multiplier.
+14. Ride cancellation by a rider after driver arrival shall incur a cancellation fee of $2.00 charged to the rider.
+15. The system shall provide in-app SOS functionality; activating SOS must immediately share the rider's real-time location with emergency contacts and the platform safety team.
+16. Drivers must maintain a minimum rating of 4.0 out of 5.0; drivers falling below this threshold must be notified and may be deactivated after 30 days without improvement.
+17. The system should make commuting better for everyone.
+18. The payment split feature shall allow riders to divide the fare equally among up to 4 riders; each participant must confirm their share via in-app notification within 5 minutes.
+19. All location data must be encrypted in transit using TLS 1.3; stored location history must be retained for 90 days only.
+20. The system shall generate a weekly earnings summary report for each driver, delivered via email every Monday at 08:00 local time.
+21. Promo codes must be validated at booking confirmation; invalid or expired codes must return a descriptive error message within 1 second.
+22. The system shall enforce a maximum of 12 driving hours per day per driver and alert the driver and fleet manager when 10 hours are reached.

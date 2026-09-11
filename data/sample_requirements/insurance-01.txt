@@ -1,0 +1,26 @@
+Insurance Claims Processing System — Claim Lifecycle Requirements
+
+Functional Requirements
+
+1. The system shall allow policyholders to submit insurance claims online by uploading supporting documents, photographs, and a written incident description.
+2. When a claim is submitted, the system shall assign a unique claim number and send an acknowledgment to the policyholder within 5 minutes.
+3. A claim transitions from 'Submitted' to 'Under Investigation' when an adjuster is assigned; to 'Approved' or 'Rejected' after investigation; to 'Paid' once the approved settlement amount is disbursed; and to 'Closed' after payment confirmation.
+4. Only licensed adjusters with the 'Claims Adjuster' role may change claim status from 'Under Investigation' to 'Approved' or 'Rejected'.
+5. Each claim record must contain: claim_id (UUID), policy_id (FK), claimant_id (FK), incident_date (ISO 8601 date), claim_type (enum), submitted_at (ISO 8601 datetime), claimed_amount (decimal, 2 decimal places), and status (enum).
+6. The system shall integrate with the insurance fraud detection API; all claims above $10,000 must be automatically submitted for fraud scoring before adjuster assignment.
+7. Claim acknowledgment must be sent within 5 minutes for 99.5% of submissions.
+8. The claims system should be fair and easy to use for policyholders.
+9. Claims exceeding $50,000 must be reviewed and co-approved by a Senior Adjuster and the Claims Manager before status changes to 'Approved'.
+10. Only adjusters assigned to a specific claim may view, update, or add notes to that claim; unassigned adjusters may only view anonymized claim summaries.
+11. Supporting documents uploaded with a claim must be virus-scanned within 60 seconds; documents failing the scan must be quarantined and the claimant notified.
+12. The system shall calculate and apply depreciation to claim settlements for property damage claims using the configured depreciation schedule.
+13. Settlement payments must be initiated via ACH bank transfer; the payment must reach the claimant's account within 3 business days of approval.
+14. The system shall generate a monthly claims analytics report by claim type, average settlement amount, fraud rate, and average processing time.
+15. All claim documents must be retained for 10 years in compliance with insurance regulatory requirements.
+16. The system shall enforce policy coverage limits; any approved settlement exceeding the policy coverage limit must be flagged for manual review.
+17. The system should process claims faster than competitors.
+18. Claim denial letters must be auto-generated using the configured letter template and include the specific denial reason code and applicable policy clause.
+19. Claimants must be notified by email and SMS at every status transition; notification must be sent within 2 minutes of the status change.
+20. The adjuster workload dashboard must display each adjuster's open claims, average days to resolution, and approval/rejection rate.
+21. Claims submitted more than 90 days after the incident date must be flagged for late submission review and cannot be fast-tracked.
+22. The system shall support subrogation tracking; when the insurer recovers costs from a third party, the recovery amount must be recorded and linked to the originating claim.
