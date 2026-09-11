@@ -1,0 +1,26 @@
+FinTech Payment Gateway — Transaction Processing Requirements
+
+Functional Requirements
+
+1. The system shall process payment authorization requests within 500ms end-to-end for 99th percentile latency under 2000 TPS sustained load.
+2. When a merchant submits a payment request, the system shall validate the merchant API key, verify the card BIN against the issuer registry, and route the transaction to the appropriate acquirer.
+3. A payment transitions from 'Authorized' to 'Captured' when the merchant issues a capture call; from 'Authorized' to 'Voided' if the merchant cancels before capture; and from 'Captured' to 'Refunded' upon a valid refund request.
+4. Only users with the 'Payment Operations' role shall be permitted to manually override a declined transaction and force-approve it with a documented reason code.
+5. Each payment record must contain: payment_id (UUID), merchant_id (UUID), amount (decimal, 2 decimal places), currency (ISO 4217), card_token (string), authorization_code (string), processor_response_code (string), timestamp (ISO 8601), and status (enum: Authorized|Captured|Voided|Refunded|Declined|Error).
+6. The system shall integrate with Visa, Mastercard, and Amex processing networks; if the primary processor is unavailable, transactions shall be routed to the configured backup processor within 2 seconds.
+7. The system should be reliable and never lose transaction data.
+8. The fraud scoring engine shall evaluate each transaction against velocity checks (>5 transactions in 60 seconds from the same card), geographic anomaly detection, and device fingerprint analysis, returning a risk score between 0.0 and 1.0.
+9. Only a 'Compliance Manager' may access raw cardholder data; all other roles shall see masked card numbers (first 6 and last 4 digits only).
+10. The system shall support idempotency keys on all payment endpoints; duplicate requests with the same idempotency key within 24 hours must return the original response without creating a new transaction.
+11. Settlement files shall be generated daily in ISO 8583 format and transmitted to the acquiring bank via SFTP by 23:00 UTC.
+12. If a chargeback is received, the system shall automatically transition the payment to 'Disputed', notify the merchant via webhook, and create a case file with a 30-day response deadline.
+13. The system shall maintain 99.999% uptime for the payment authorization endpoint, measured on a rolling 30-day window.
+14. All API communication must use TLS 1.3; connections attempting TLS 1.1 or lower shall be rejected.
+15. The reconciliation engine shall cross-reference processor settlement reports against internal transaction records daily and flag discrepancies exceeding $0.01.
+16. The system should handle international payments smoothly.
+17. Webhook delivery to merchant endpoints shall retry with exponential backoff (1s, 2s, 4s, 8s, 16s) for up to 5 attempts; after exhaustion, the event shall be marked as 'delivery_failed' and surfaced in the merchant dashboard.
+18. Rate limiting shall be enforced per merchant API key: 100 requests/second for standard tier, 500 requests/second for enterprise tier; excess requests shall receive HTTP 429 with a Retry-After header.
+19. All PAN data must be tokenized at the edge before reaching the core processing layer; the tokenization service must comply with PCI-DSS Level 1 requirements.
+20. The system shall generate monthly merchant statements in PDF format containing transaction summary, fee breakdown, chargebacks, and net settlement amounts.
+21. Multi-currency transactions must use exchange rates sourced from the European Central Bank feed, refreshed every 15 minutes, with a configurable markup percentage per merchant.
+22. The system shall support 3D Secure 2.0 authentication flows for all card-present and card-not-present transactions in compliance with PSD2 SCA requirements.

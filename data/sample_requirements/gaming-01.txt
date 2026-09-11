@@ -1,0 +1,25 @@
+Online Gaming Platform — Multiplayer & Matchmaking Requirements
+
+Functional Requirements
+
+1. The system shall allow players to create an account using email, Google, or Discord OAuth, storing a unique gamer tag of 3-20 alphanumeric characters.
+2. When a player queues for a ranked match, the matchmaking engine shall pair players within 200 MMR points and start the lobby within 30 seconds for 95% of requests.
+3. A match transitions from 'Lobby' to 'In Progress' when all players confirm readiness; from 'In Progress' to 'Completed' when a win condition is met; and from 'In Progress' to 'Abandoned' if fewer than 2 players remain for over 60 seconds.
+4. Only users with the 'Game Moderator' role shall be permitted to issue temporary bans, mute players, or review reported chat logs.
+5. Each match record must contain: match_id (UUID), game_mode (enum: Ranked|Casual|Tournament), player_ids (array of UUIDs), map_name (string), start_time (ISO 8601), end_time (ISO 8601), winner_team_id (UUID, nullable), and final_scores (JSON object).
+6. The system shall integrate with Steam and Epic Games Store APIs for cross-platform friend list synchronization; if either API is unavailable, the system shall display cached friend data up to 24 hours old.
+7. The game client shall render frames at a minimum of 60 FPS on medium-quality settings for hardware meeting the published minimum specifications.
+8. The system should provide a fun and engaging gaming experience for all players.
+9. When a player disconnects during a ranked match, the system shall hold their slot for 120 seconds; if the player does not reconnect within this window, a loss is recorded for the disconnected player and the match continues.
+10. Only a 'Tournament Admin' may create, modify, or cancel tournament brackets; 'Players' may register and view bracket progress but not alter it.
+11. The leaderboard must update within 10 seconds of a ranked match completing and reflect global, regional, and friend-only views.
+12. The in-game voice chat latency must not exceed 80ms one-way for players in the same geographic region.
+13. Anti-cheat scans shall run in a sandboxed kernel-level driver and report violations to the server within 5 seconds; confirmed violations result in automatic session termination.
+14. The in-game store shall apply promotional discounts only during the configured promotion window; discounts must never reduce the final price below the configured floor price.
+15. The system should handle a lot of players at once without problems.
+16. Player inventory items must be stored as a typed JSON array with fields: item_id (UUID), item_type (enum: Skin|Weapon|Emote|Currency), acquired_date (ISO 8601), and tradeable (boolean).
+17. If a player reports another player for abusive chat, the system shall log the last 50 chat messages in that match session and flag the report for moderator review within 24 hours.
+18. The system shall generate weekly engagement analytics reports containing DAU, MAU, session length distribution, and retention cohort data, deposited in the analytics S3 bucket by Monday 04:00 UTC.
+19. All player passwords must be stored using Argon2id hashing with a minimum memory cost of 64MB; plaintext passwords must never be persisted.
+20. The system shall support hot-patching of game balance parameters (damage values, cooldowns, spawn rates) without requiring a full client update or server restart.
+21. Replay files shall be stored for 30 days and be downloadable by any match participant; after 30 days, replays are archived to cold storage.

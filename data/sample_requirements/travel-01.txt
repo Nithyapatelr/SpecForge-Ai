@@ -1,0 +1,26 @@
+Travel Agency Platform — Booking & Itinerary Management Requirements
+
+Functional Requirements
+
+1. The system shall allow customers to search for flights, hotels, and car rentals simultaneously, displaying combined package pricing within 3 seconds for 95% of search queries.
+2. When a customer confirms a booking, the system shall reserve inventory with the supplier, process payment, generate a booking confirmation PDF, and send it via email within 30 seconds.
+3. A booking transitions from 'Confirmed' to 'Ticketed' once supplier e-tickets are issued; from 'Ticketed' to 'Checked In' when the traveler completes online check-in; and from 'Confirmed' to 'Cancelled' upon customer cancellation, triggering refund processing.
+4. Only users with the 'Travel Consultant' role shall be permitted to override system-generated pricing, apply custom discounts exceeding 15%, or issue manual refunds.
+5. Each booking record must contain: booking_id (UUID), customer_id (UUID), segments (array of {type: Flight|Hotel|Car|Activity, supplier_id, confirmation_number, dates, pricing}), total_amount (decimal), currency (ISO 4217), payment_status (enum: Pending|Paid|PartialRefund|FullRefund), and created_at (ISO 8601).
+6. The system shall integrate with Amadeus GDS for flight inventory, Booking.com API for hotel availability, and Hertz/Avis APIs for car rentals; if a supplier API is unavailable, the system shall display cached results with a 'prices may vary' disclaimer.
+7. The system should make travel planning easy and stress-free.
+8. The dynamic packaging engine shall bundle flight + hotel combinations, applying negotiated contracted rates and marking up by the configured margin per destination, ensuring the package price is always lower than the sum of standalone bookings.
+9. Only a 'Finance Manager' may process refunds exceeding $5,000 or adjust commission rates; 'Travel Consultants' may initiate refund requests but not approve amounts above this threshold.
+10. The itinerary builder shall produce a day-by-day travel plan including flight details, hotel check-in/out, activity schedules, and local weather forecasts, rendered as a shareable web page and downloadable PDF.
+11. Visa requirement checks shall be performed based on the traveler's nationality and destination country using the Sherpa API, displaying required documents and processing times during the booking flow.
+12. If a flight segment is cancelled by the airline, the system shall automatically search for alternative flights within 6 hours of the original departure, present options to the customer, and rebook upon selection.
+13. The system should handle group bookings efficiently.
+14. The loyalty points module shall accrue points per dollar spent (1 point per $1 for standard, 2 points for premium members), with points redeemable for future bookings at a rate of 100 points = $1.
+15. Travel insurance shall be offered during checkout with options for trip cancellation, medical emergency, and baggage loss coverage; policy documents must be generated and delivered instantly upon purchase.
+16. The corporate travel module shall enforce company travel policies (preferred airlines, maximum hotel rate per city, advance booking requirements) and flag non-compliant bookings for manager approval.
+17. Currency conversion shall use real-time exchange rates from the Open Exchange Rates API, refreshed every 30 minutes, with the conversion rate locked at the time of booking confirmation.
+18. The review and rating system shall allow verified travelers to rate flights, hotels, and activities on a 1-5 scale with written reviews; reviews must be moderated within 48 hours before public display.
+19. All customer passport and identity document scans must be encrypted at rest using AES-256 and automatically purged 90 days after trip completion unless the customer opts for storage.
+20. The system shall generate monthly sales reports per consultant, destination, and supplier, including booking volume, revenue, commission earned, and cancellation rate.
+21. The mobile app shall support offline access to confirmed itineraries, boarding passes, and hotel vouchers, with automatic sync when connectivity is restored.
+22. Group booking management shall support rooming list uploads (CSV), individual payment splitting, group leader dashboards, and automated name-change handling up to 72 hours before departure.

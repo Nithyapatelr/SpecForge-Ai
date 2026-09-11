@@ -1,0 +1,25 @@
+Fitness & Wellness Application — Workout & Health Tracking Requirements
+
+Functional Requirements
+
+1. The system shall allow users to create a profile with fields: user_id (UUID), display_name (string), date_of_birth (ISO 8601 date), height_cm (integer), weight_kg (decimal), fitness_goal (enum: LoseWeight|BuildMuscle|Endurance|Flexibility|GeneralFitness), and activity_level (enum: Sedentary|LightlyActive|Active|VeryActive).
+2. When a user completes a workout session, the system shall calculate calories burned using the MET (Metabolic Equivalent of Task) formula adjusted for the user's weight, and update the daily activity summary within 5 seconds.
+3. A training plan transitions from 'Draft' to 'Active' when the user starts the first scheduled workout; from 'Active' to 'Completed' when all scheduled workouts are finished; and from 'Active' to 'Paused' if the user misses 3 consecutive scheduled workouts.
+4. Only users with the 'Certified Trainer' role shall be permitted to create and publish workout templates visible to all users; regular users may create private custom workouts only.
+5. Each workout record must contain: workout_id (UUID), user_id (UUID), workout_type (enum: Strength|Cardio|HIIT|Yoga|Swimming|Cycling|Running|Custom), exercises (array of {name, sets, reps, weight_kg, duration_seconds}), heart_rate_avg_bpm (integer), calories_burned (decimal), start_time (ISO 8601), and duration_minutes (decimal).
+6. The system shall integrate with Apple HealthKit and Google Fit APIs for bidirectional sync of step count, heart rate, and sleep data; if sync fails, the system shall queue the sync and retry every 15 minutes for up to 24 hours.
+7. The app should help users get fit and stay motivated.
+8. The nutrition tracking module shall allow users to log meals by scanning barcodes or searching the USDA FoodData Central database, calculating macronutrient totals (protein, carbs, fat) and caloric intake per meal and per day.
+9. Only an 'Admin' may feature workout plans on the Explore page or ban users for inappropriate content; 'Moderators' may review and hide flagged content but not ban users.
+10. The social feed shall display workout completions, personal records, and milestone achievements from followed users, loading the first 20 items within 1.5 seconds.
+11. Push notifications for workout reminders must be delivered at the user's preferred time in their local timezone, with a delivery accuracy of +/- 1 minute.
+12. If a user's resting heart rate (from wearable sync) exceeds their 30-day rolling average by more than 15%, the system shall suggest a recovery day and reduce planned workout intensity.
+13. The system should have a nice and clean design.
+14. Progress charts shall display weight, body measurements, strength progression, and cardio performance over time periods of 1 week, 1 month, 3 months, 6 months, and 1 year, with exportable PNG and CSV options.
+15. The workout timer shall function offline with locally cached workout plans; completed offline workouts shall sync to the server upon reconnection.
+16. Streak tracking shall count consecutive days with at least one logged activity; streaks of 7, 30, 60, 90, and 365 days shall unlock achievement badges.
+17. The AI workout recommendation engine shall suggest exercises based on the user's fitness goal, available equipment, workout history, and muscle group recovery status (minimum 48 hours between training the same major muscle group).
+18. All health data must be encrypted at rest using AES-256 and in transit using TLS 1.3; the system must comply with HIPAA guidelines for health information handling.
+19. The community challenge feature shall support time-bound competitions (e.g., most steps in a week, heaviest deadlift) with leaderboards updated in real time and prize distribution tracking.
+20. The system shall generate weekly summary emails containing workout count, total calories burned, step count, sleep quality score, and comparison to the previous week.
+21. Video exercise demonstrations shall be streamed using adaptive bitrate (HLS) with quality levels from 360p to 1080p based on the user's connection speed.

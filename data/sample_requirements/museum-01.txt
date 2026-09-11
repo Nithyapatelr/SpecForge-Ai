@@ -1,0 +1,24 @@
+Museum & Gallery Management — Collection & Visitor Experience Requirements
+
+Functional Requirements
+
+1. The system shall catalog all collection items with fields: accession_number (string, unique), title (string), artist (string), medium (string), dimensions_cm (JSON object with height, width, depth), acquisition_date (ISO 8601), provenance (text), insurance_value_usd (decimal), and current_location (string).
+2. When a visitor purchases a ticket online, the system shall generate a unique QR code, send it via email within 10 seconds, and update the daily visitor capacity counter in real time.
+3. A loan request transitions from 'Submitted' to 'Under Review' when assigned to a curator; from 'Under Review' to 'Approved' or 'Rejected' after curatorial and conservation assessment; and from 'Approved' to 'On Loan' when the item physically leaves the premises.
+4. Only users with the 'Chief Curator' role shall be permitted to approve outgoing loans to other institutions or modify the permanent gallery layout.
+5. The audio guide system shall deliver location-aware content to visitor devices using BLE beacons, triggering the correct narration within 3 seconds of the visitor entering a gallery zone.
+6. The system shall integrate with the Getty ULAN and AAT vocabularies for standardized artist names and art classification terms; if the Getty API is unavailable, local cached vocabularies shall be used.
+7. The museum experience should be interesting and educational for all visitors.
+8. Environmental monitoring sensors shall track temperature (target: 21 +/- 1 C), relative humidity (target: 45 +/- 5%), and UV exposure in each gallery; if readings deviate beyond thresholds for 15 minutes, the system shall alert the conservation team.
+9. Only a 'Registrar' may update an item's accession record, insurance valuation, or condition report; 'Gallery Attendants' may view item details but not modify them.
+10. The online collection search shall support full-text search across title, artist, medium, and provenance fields with faceted filtering by period, medium, and gallery location, returning results within 2 seconds.
+11. The ticketing system shall enforce daily visitor capacity limits per gallery wing and time slot, automatically closing sold-out slots and offering the next available option.
+12. Condition reports must be created before and after each loan period, including photographic documentation; the system shall flag any new damage detected by comparing pre- and post-loan images.
+13. The system should work well on mobile phones.
+14. The digital exhibition builder shall allow curators to create virtual exhibitions with drag-and-drop layout, high-resolution zoomable images, and multimedia content, publishable to the public website.
+15. All visitor personal data must be processed in compliance with GDPR; consent must be explicitly obtained before marketing emails, and data deletion requests must be fulfilled within 72 hours.
+16. The gift shop POS integration shall sync inventory with the online store in real time, preventing overselling of limited-edition merchandise.
+17. The membership management module shall support tiered memberships (Individual, Family, Patron, Benefactor) with automated renewal reminders sent 30 and 7 days before expiration.
+18. The system shall generate monthly visitor analytics reports including total visitors, average dwell time per gallery, popular exhibits, and demographic breakdown (when voluntarily provided).
+19. Artwork transport tracking shall integrate with FedEx and DHL APIs to provide real-time shipment status for incoming and outgoing loans, alerting the registrar upon delivery exceptions.
+20. The conservation lab module shall schedule and track treatment workflows with task dependencies, material usage, and before/after photography, maintaining a complete treatment history per item.

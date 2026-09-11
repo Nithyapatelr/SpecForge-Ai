@@ -1,0 +1,26 @@
+Energy Grid Management — Smart Grid & Renewable Integration Requirements
+
+Functional Requirements
+
+1. The system shall ingest real-time power flow data from 10,000+ smart meters at 15-second intervals via the IEC 61850 protocol.
+2. When grid frequency deviates beyond +/- 0.5 Hz from the nominal 50 Hz, the system shall activate automatic load shedding within 200ms, prioritizing non-critical zones.
+3. A power outage transitions from 'Detected' to 'Dispatched' when a repair crew is assigned; from 'Dispatched' to 'Under Repair' upon crew arrival confirmation; and from 'Under Repair' to 'Resolved' once power is restored and verified by smart meter readings.
+4. Only users with the 'Grid Controller' role shall be permitted to manually override automatic load balancing decisions or modify generation dispatch schedules.
+5. Each meter reading must contain: reading_id (UUID), meter_id (string), consumption_kwh (decimal, 3 decimal places), voltage_v (decimal), current_a (decimal), power_factor (decimal), timestamp (ISO 8601), and quality_flag (enum: Valid|Estimated|Missing).
+6. The system shall integrate with the national weather service API for solar irradiance and wind speed forecasts to predict renewable generation capacity 24 hours ahead with error margins below 10%.
+7. The system should support clean energy and reduce carbon emissions.
+8. The demand response module shall send curtailment signals to enrolled industrial consumers via OpenADR 2.0b protocol, achieving 90% signal delivery within 60 seconds.
+9. Only an 'Energy Market Analyst' may submit bids to the wholesale energy exchange; the system shall validate that bid quantities do not exceed available generation capacity plus contracted reserves.
+10. The SCADA dashboard shall display real-time grid topology, power flows, and alarm status with a maximum data latency of 3 seconds from field device to screen.
+11. If a transformer load exceeds 85% of rated capacity for more than 10 consecutive minutes, the system shall trigger an overload warning and recommend load redistribution to the grid controller.
+12. All communication between substations and the control center must use IEC 62351 security standards, including mutual TLS authentication and message integrity verification.
+13. The billing engine shall calculate time-of-use tariffs with peak, off-peak, and super-off-peak rates, generating monthly invoices in PDF format with itemized consumption breakdown.
+14. The renewable integration module shall curtail solar/wind generation only as a last resort; priority shall be given to battery storage absorption and demand response before curtailment.
+15. The system should handle power demand efficiently.
+16. Fault location identification shall use impedance-based algorithms on distribution feeders, pinpointing fault location within 100 meters accuracy in 95% of cases.
+17. The energy storage management module shall optimize battery charge/discharge cycles to maximize arbitrage revenue while maintaining state-of-charge between 20% and 80% to preserve battery health.
+18. The system shall archive all SCADA event logs for a minimum of 10 years in compliance with NERC CIP standards, with indexed search capability across the full archive.
+19. Distributed energy resource (DER) registration shall validate inverter IEEE 1547 compliance certificates before allowing grid interconnection.
+20. The system shall generate daily generation mix reports showing the percentage contribution of coal, natural gas, nuclear, solar, wind, and hydro sources.
+21. Microgrid islanding detection shall identify unintentional islanding within 2 seconds using rate-of-change-of-frequency (ROCOF) and vector shift methods.
+22. Customer net metering accounts shall track bidirectional energy flow and calculate monthly credits at the approved feed-in tariff rate, rolling over unused credits for up to 12 months.

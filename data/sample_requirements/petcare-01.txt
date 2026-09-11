@@ -1,0 +1,25 @@
+Pet Care & Veterinary Management — Animal Health & Booking Requirements
+
+Functional Requirements
+
+1. The system shall maintain a pet profile with fields: pet_id (UUID), owner_id (UUID), name (string), species (enum: Dog|Cat|Bird|Rabbit|Reptile|Fish|Other), breed (string), date_of_birth (ISO 8601 date), weight_kg (decimal), microchip_id (string, nullable), and vaccination_status (JSON array).
+2. When a pet owner books a veterinary appointment online, the system shall check vet availability, confirm the slot within 5 seconds, and send a confirmation SMS and email with appointment details.
+3. A vaccination record transitions from 'Due' to 'Administered' when the vet records the injection; from 'Administered' to 'Expired' when the validity period passes; and from 'Expired' to 'Overdue' if not renewed within 30 days of expiration.
+4. Only users with the 'Licensed Veterinarian' role shall be permitted to prescribe medications, update diagnosis records, or authorize surgical procedures.
+5. Each medical visit record must contain: visit_id (UUID), pet_id (UUID), vet_id (UUID), visit_date (ISO 8601), chief_complaint (text), examination_notes (text), diagnosis_codes (array of ICD-10-Vet codes), prescribed_treatments (array), follow_up_date (ISO 8601, nullable), and invoice_id (UUID).
+6. The system shall integrate with PetDesk and Vetspire APIs for appointment synchronization; if the third-party API is unavailable, appointments shall be queued locally and synced upon reconnection within 30 minutes.
+7. The system should make pet care convenient for pet owners.
+8. The medication reminder module shall send push notifications to pet owners at the prescribed administration times, with snooze and confirmation options; unconfirmed doses shall trigger a follow-up alert after 30 minutes.
+9. Only a 'Clinic Manager' may modify pricing for services, adjust staff schedules, or access financial reports; 'Receptionists' may book appointments and process payments but not modify pricing.
+10. The prescription system shall validate drug interactions against a veterinary pharmacology database before allowing a vet to finalize a prescription; flagged interactions must be acknowledged by the vet with a documented override reason.
+11. Pet owners shall be able to view their pet's complete medical history, including visit notes, lab results, X-ray images, and vaccination records, through a secure owner portal.
+12. The appointment scheduling system shall prevent double-booking of veterinarians and examination rooms; if a conflict is detected, the system shall suggest the nearest available alternative slot.
+13. The system should handle emergencies properly.
+14. Lab result integration shall automatically import blood work, urinalysis, and pathology results from connected laboratory equipment (IDEXX, Abaxis) and attach them to the corresponding visit record.
+15. The boarding and grooming module shall track kennel assignments, feeding schedules, medication administration, exercise logs, and behavior notes for each boarded pet, with real-time updates visible to owners.
+16. The invoicing system shall generate itemized bills with service codes, medication costs, tax calculations, and payment method tracking; partial payments and payment plans must be supported.
+17. All medical records must be retained for a minimum of 7 years per veterinary regulatory requirements; archived records must be retrievable within 24 hours upon request.
+18. The pet adoption module shall list available animals with photos, medical history summary, temperament assessment, and adoption requirements; adoption applications shall be workflow-managed with background check integration.
+19. The telemedicine module shall support HIPAA-compliant video consultations with screen sharing, photo upload for visual examination, and integrated note-taking, with session recordings stored for 90 days.
+20. The system shall generate monthly clinic performance reports including appointment volume, revenue by service category, client retention rate, and average wait time.
+21. Emergency triage shall classify incoming cases using a 5-level urgency scale; Level 1 (life-threatening) cases shall bypass the regular queue and trigger immediate vet notification via SMS and intercom.

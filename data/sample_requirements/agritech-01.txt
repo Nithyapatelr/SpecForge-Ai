@@ -1,0 +1,25 @@
+Smart Agriculture Platform — Crop Monitoring & IoT Requirements
+
+Functional Requirements
+
+1. The system shall ingest telemetry data from soil moisture sensors, weather stations, and drone imagery at intervals of 5 minutes, 15 minutes, and daily, respectively.
+2. When soil moisture drops below the configured threshold for a specific crop zone, the system shall automatically trigger the irrigation controller and send an alert to the farm manager's mobile app within 30 seconds.
+3. A crop cycle transitions from 'Planted' to 'Growing' once germination is sensor-confirmed; from 'Growing' to 'Harvest Ready' when the NDVI index exceeds 0.75 for 5 consecutive days; and from 'Harvest Ready' to 'Harvested' upon manual confirmation.
+4. Only users with the 'Agronomist' role shall be permitted to modify crop treatment plans, including pesticide schedules and fertilizer application rates.
+5. Each sensor reading must contain: reading_id (UUID), sensor_id (string), sensor_type (enum: SoilMoisture|Temperature|Humidity|WindSpeed|Rainfall|LightIntensity), value (decimal), unit (string), timestamp (ISO 8601), and gps_coordinates (latitude, longitude as decimal degrees).
+6. The system shall integrate with the USDA Crop Forecast API for regional yield predictions; if the API is unavailable, the system shall use the last cached forecast data up to 7 days old.
+7. The system should help farmers increase crop yields.
+8. Drone flight plans must be uploaded as GeoJSON polygons; the system shall validate that the flight area does not exceed the farm boundary and reject plans that overlap with no-fly zones.
+9. The pest detection module shall analyze drone imagery using a convolutional neural network and flag affected zones with bounding boxes and confidence scores above 0.80.
+10. Only a 'Farm Owner' may approve purchase orders for seeds, fertilizers, and equipment exceeding $5,000; 'Farm Workers' may submit requests but not approve them.
+11. The dashboard shall display real-time sensor data with a maximum lag of 60 seconds from sensor reading to dashboard update.
+12. Weather forecast data shall be pulled from OpenWeatherMap API every 3 hours and cached locally for offline access during connectivity outages.
+13. The system shall generate monthly yield reports comparing actual vs predicted harvest quantities per crop zone, exported as CSV and PDF.
+14. All sensor communication must use MQTT over TLS; unencrypted MQTT connections shall be rejected by the broker.
+15. If a sensor fails to report for 3 consecutive intervals, the system shall mark it as 'Offline', notify the maintenance team, and interpolate missing data from adjacent sensors.
+16. The system should be easy for farmers to use even if they are not tech-savvy.
+17. Irrigation schedules must account for forecasted rainfall: if rainfall exceeding 10mm is predicted within 24 hours, scheduled irrigation shall be deferred automatically.
+18. Soil health indices (pH, nitrogen, phosphorus, potassium) shall be calculated weekly from lab-uploaded test results and displayed as trend charts with historical comparison.
+19. The system shall maintain a geo-fenced asset registry tracking all equipment (tractors, drones, sensors) with real-time GPS location updated every 60 seconds.
+20. The mobile app shall function in offline mode for up to 72 hours, syncing queued actions and cached data upon reconnection.
+21. Harvest logistics shall integrate with third-party transport scheduling APIs to auto-book pickup trucks based on estimated harvest volume and nearest available fleet.
