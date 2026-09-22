@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_15_ticket_service",
+  "title": "Event Ticket Booking Service",
+  "domain": "E-Commerce / Ticketing",
+  "raw_text": "The system shall manage event ticket sales and venue seat reservations. Customers must select seats and complete checkout within a time window. Seat holds should expire automatically if checkout is not finished. Ticket issuance shall proceed reliably upon payment confirmation.",
+  "ground_truth_checklist": [
+    "Event listing creation with venue details, date, and seat map",
+    "Seat availability query returning real-time seat status",
+    "Temporary seat hold mechanism reserving seat during checkout window",
+    "Automated hold expiration background task releasing unpaid seats",
+    "Order creation and checkout payment processing trigger",
+    "Unique QR code or barcode ticket generation upon payment",
+    "Double-booking prevention using database row locking",
+    "Tiered ticket pricing (e.g. VIP, Standard, Economy)",
+    "Customer booking confirmation email trigger payload",
+    "Event organizer sales dashboard reporting revenue and tickets sold",
+    "Ticket scan verification endpoint for venue entry",
+    "Refund and order cancellation processing within policy window"
+  ]
+}

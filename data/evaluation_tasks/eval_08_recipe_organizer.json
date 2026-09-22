@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_08_recipe_organizer",
+  "title": "Recipe & Grocery List Manager",
+  "domain": "Consumer Apps / Productivity",
+  "raw_text": "The system shall store recipes with ingredients and cooking steps. Users must be able to search recipes by ingredient keyword. Grocery lists should be generated automatically from selected recipes. Recipe images shall be uploaded appropriately.",
+  "ground_truth_checklist": [
+    "Recipe creation endpoint with title, instructions, and preparation time",
+    "Ingredient list model specifying name, quantity, and measurement unit",
+    "Keyword search filtering recipes by available ingredients",
+    "Automated grocery list aggregation from multiple recipes",
+    "Ingredient quantity consolidation on grocery list",
+    "Serving size scaling adjusting ingredient amounts",
+    "Recipe categorization by meal type (breakfast, lunch, dinner)",
+    "Dietary constraint tag filtering (vegan, gluten-free)",
+    "Favorite recipe bookmarking per user account",
+    "Image upload support for recipe cover photos",
+    "Step-by-step cooking mode view",
+    "Export grocery list as plain text or PDF"
+  ]
+}

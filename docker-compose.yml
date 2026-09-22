@@ -19,6 +19,15 @@ services:
     env_file:
       - .env
 
+  chatdev:
+    build:
+      context: .
+      dockerfile: Dockerfile.chatdev
+    volumes:
+      - ./data/chatdev_workspace:/app/ChatDev/WareHouse
+    env_file:
+      - .env
+
 # PostgreSQL service — uncomment when migrating from SQLite to Postgres.
 #   db:
 #     image: postgres:16-alpine

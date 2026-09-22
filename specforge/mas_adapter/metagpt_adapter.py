@@ -8,6 +8,7 @@ import subprocess
 import logging
 from typing import Any, Dict, Optional
 
+from specforge.mas_adapter.annotation_format import build_annotated_prompt
 from specforge.mas_adapter.base import MASAdapter
 from specforge.mas_adapter.service import register_adapter
 
@@ -26,38 +27,7 @@ class MetaGPTAdapter(MASAdapter):
         If annotated_spec is None, return task_description as-is.
         If annotated_spec is present, prepend a structured pre-analysis block.
         """
-        if not annotated_spec or "requirements" not in annotated_spec:
-            return task_description
-
-        reqs = annotated_spec.get("requirements", [])
-        high_ambiguity_reqs = [r for r in reqs if r.get("ambiguity_score", 0.0) > 0.6]
-
-        lines = [
-            "=== SPECFORGE AI PRE-ANALYSIS ANNOTATIONS ===",
-            f"Total Ingested Requirements: {len(reqs)}",
-            f"High Ambiguity Count: {len(high_ambiguity_reqs)}",
-            "",
-            "Requirements Summary & Intent Classifications:",
-        ]
-
-        for idx, r in enumerate(reqs, start=1):
-            lbl = r.get("rit_label", "Unclassified")
-            score = r.get("ambiguity_score", 0.0)
-            text = r.get("atomic_unit_text", "")
-            lines.append(f"  {idx}. [{lbl}] (Ambiguity: {score:.2f}) {text}")
-            reasons = r.get("ambiguity_reasons", [])
-            if reasons:
-                lines.append(f"     -> WARNINGS: {'; '.join(reasons)}")
-
-        if high_ambiguity_reqs:
-            lines.append("")
-            lines.append("CRITICAL NOTICE: Pay special attention to requirements flagged with high ambiguity (>0.60). Clarify or constrain these requirements during specification breakdown.")
-
-        lines.append("=== END SPECFORGE ANNOTATIONS ===")
-        lines.append("")
-        lines.append(task_description)
-
-        return "\n".join(lines)
+        return build_annotated_prompt(annotated_spec, task_description)
 
     def run(self, prepared_input: str, output_dir: str) -> Dict[str, Any]:
         """

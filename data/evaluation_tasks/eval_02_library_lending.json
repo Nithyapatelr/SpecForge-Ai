@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_02_library_lending",
+  "title": "Library Book Lending System",
+  "domain": "Enterprise Software / Management",
+  "raw_text": "The system shall manage library book checkout and return operations. Patrons must be registered with a unique member ID. Overdue books should trigger fine calculations automatically. The system shall update book availability status seamlessly.",
+  "ground_truth_checklist": [
+    "Patron registration and unique member ID generation",
+    "Book catalog storage with ISBN, title, and author details",
+    "Checkout process recording borrower ID and due date",
+    "Return process recording return date and updating inventory",
+    "Automated overdue fine calculation policy",
+    "Book availability status tracking (available/checked_out)",
+    "Maximum checkout limit enforcement per patron",
+    "Search functionality by title, author, or ISBN",
+    "Overdue notification message generation",
+    "Database transaction integrity for checkout operations",
+    "Admin view for viewing active loan records",
+    "Fine payment recording mechanism"
+  ]
+}

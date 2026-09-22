@@ -29,6 +29,7 @@ def execute_mas_run(
     framework_name: str = "metagpt",
     annotated: bool = False,
     output_dir: Optional[str] = None,
+    batch_id: Optional[str] = None,
 ) -> str:
     """
     Execute a MAS framework run on a task with optional SpecForge annotations.
@@ -38,6 +39,8 @@ def execute_mas_run(
     """
     if framework_name == "metagpt" and "metagpt" not in ADAPTER_REGISTRY:
         import specforge.mas_adapter.metagpt_adapter  # noqa: F401
+    if framework_name == "chatdev" and "chatdev" not in ADAPTER_REGISTRY:
+        import specforge.mas_adapter.chatdev_adapter  # noqa: F401
 
     if framework_name not in ADAPTER_REGISTRY:
         raise ValueError(
@@ -68,6 +71,7 @@ def execute_mas_run(
     # Step 4: Persist MASRuns record
     with get_session() as session:
         mas_run = MASRuns(
+            batch_id=batch_id,
             source_doc_id=source_doc_id,
             framework_name=framework_name,
             annotated=annotated,

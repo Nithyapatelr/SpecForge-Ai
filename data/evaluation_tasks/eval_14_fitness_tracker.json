@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_14_fitness_tracker",
+  "title": "Workout & Cardio Session Tracker",
+  "domain": "Fitness / Wearable Integration",
+  "raw_text": "The system shall log workout sessions including strength training and cardio runs. Exercise sets must record weight, repetitions, and rest interval. Caloric expenditure should be calculated accurately based on activity duration. Fitness goals shall be monitored effectively.",
+  "ground_truth_checklist": [
+    "Workout session creation with title, category, and start/end time",
+    "Exercise detail entry specifying exercise name, weight, and rep count",
+    "Cardio session entry specifying distance, duration, and pace",
+    "Calorie burn estimation formula based on MET values and body weight",
+    "Personal record (1-rep max) tracking per exercise",
+    "Weekly workout volume calculation (total weight lifted)",
+    "Rest timer tracking between sets",
+    "Fitness goal setting (e.g. 4 workouts per week) and progress tracker",
+    "Custom exercise definition addition to library",
+    "Workout template saving for recurring routines",
+    "Body weight and metric tracking endpoint",
+    "Activity log feed sorted chronologically"
+  ]
+}

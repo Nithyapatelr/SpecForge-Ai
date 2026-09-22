@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_13_health_logger",
+  "title": "Patient Vitals & Health Logger",
+  "domain": "Healthcare / Telemedicine",
+  "raw_text": "The system shall log patient vital signs including blood pressure and heart rate. Out-of-range vital readings must trigger clinical warning flags immediately. Patient data privacy should be maintained securely. Vitals history shall be exported cleanly for physician review.",
+  "ground_truth_checklist": [
+    "Patient record management with unique patient identifier",
+    "Vital sign entry creation (systolic BP, diastolic BP, heart rate, temperature)",
+    "Configurable clinical threshold bounds per vital metric",
+    "Automated out-of-range vital alert flag generation",
+    "Role-based access control protecting patient health data",
+    "Audit logging of all vital record reads and writes",
+    "Timestamped historical vitals list endpoint per patient",
+    "Physician review summary report generation",
+    "Data encryption at rest for sensitive health records",
+    "Validation enforcing physiological min/max range limits",
+    "Patient trend analysis calculating weekly average vitals",
+    "PDF/CSV export of patient health log"
+  ]
+}

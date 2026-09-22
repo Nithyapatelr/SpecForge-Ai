@@ -47,12 +47,13 @@ def run_comparative_experiment(
     source_doc_id: str,
     task_description: str,
     framework_name: str = "metagpt",
+    batch_id: str | None = None,
 ) -> Dict[str, Any]:
     """
     Execute baseline (unmodified) and SpecForge-annotated MAS runs for a given task,
     tag execution failures with MAST, and produce a comparative summary.
     """
-    logger.info("Starting comparative experiment for source_doc_id='%s' (%s)", source_doc_id, framework_name)
+    logger.info("Starting comparative experiment for source_doc_id='%s' (%s, batch_id=%s)", source_doc_id, framework_name, batch_id)
 
     # 1. Baseline run (annotated=False)
     baseline_run_id = execute_mas_run(
@@ -60,6 +61,7 @@ def run_comparative_experiment(
         task_description=task_description,
         framework_name=framework_name,
         annotated=False,
+        batch_id=batch_id,
     )
     log_failures_for_run(baseline_run_id)
     baseline_stats = _get_run_failure_stats(baseline_run_id)
@@ -70,6 +72,7 @@ def run_comparative_experiment(
         task_description=task_description,
         framework_name=framework_name,
         annotated=True,
+        batch_id=batch_id,
     )
     log_failures_for_run(annotated_run_id)
     annotated_stats = _get_run_failure_stats(annotated_run_id)

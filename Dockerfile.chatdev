@@ -1,0 +1,14 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y git nodejs npm && rm -rf /var/lib/apt/lists/*
+
+# Clone ChatDev at stable tag v1.0.0
+RUN git clone --branch v1.0.0 https://github.com/OpenBMB/ChatDev.git /app/ChatDev
+
+WORKDIR /app/ChatDev
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENTRYPOINT ["python", "run.py"]

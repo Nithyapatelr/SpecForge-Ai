@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_05_url_shortener",
+  "title": "URL Shortener & Analytics Engine",
+  "domain": "Web Utilities / Infrastructure",
+  "raw_text": "The system shall generate short aliases for long destination URLs. Redirects must execute fast when a short link is visited. Click analytics should be recorded for each redirection. Short code generation shall avoid collisions.",
+  "ground_truth_checklist": [
+    "API endpoint accepting original URL and returning short code",
+    "HTTP 301/302 redirection endpoint mapping short code to long URL",
+    "Collision-resistant short code generator algorithm",
+    "Original URL format validation and syntax checking",
+    "Click count incrementing on each redirection",
+    "Click analytics logging timestamp, user agent, and referrer",
+    "Optional short link expiration date setting",
+    "Custom slug option for user-defined short aliases",
+    "Rate limiting on link creation endpoint",
+    "High availability lookup latency under 50ms",
+    "API endpoint retrieving analytics summary for short link",
+    "Database indexing on short code primary key"
+  ]
+}

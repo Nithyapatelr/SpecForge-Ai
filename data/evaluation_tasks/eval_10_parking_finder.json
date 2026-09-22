@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_10_parking_finder",
+  "title": "Parking Spot Finder & Booking Service",
+  "domain": "Smart City / Mobility",
+  "raw_text": "The system shall locate available parking spots near a destination. Users must be able to reserve a parking spot for a specified time window. Spot availability should update instantly upon booking. Reservation fees shall be computed accurately.",
+  "ground_truth_checklist": [
+    "Parking lot registration with address, total capacity, and rate per hour",
+    "Geographic location search finding nearest parking lots",
+    "Real-time spot availability query by arrival and departure time",
+    "Spot reservation endpoint locking selected space for user",
+    "Hourly fee calculation logic based on duration and lot rate",
+    "Reservation status workflow (reserved, active, completed, cancelled)",
+    "Double booking prevention for overlapping time slots",
+    "User booking history and digital parking pass generation",
+    "Cancellation policy enforcement and refund window calculation",
+    "Lot operator dashboard for viewing occupied spots",
+    "Vehicle license plate registration per booking",
+    "Grace period handling for late arrivals"
+  ]
+}

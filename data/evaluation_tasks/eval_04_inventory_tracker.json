@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_04_inventory_tracker",
+  "title": "Warehouse Inventory Tracker",
+  "domain": "Logistics / Supply Chain",
+  "raw_text": "The system shall track warehouse product stock levels. Stock counts must update in real time upon receiving or dispatching goods. Reorder alerts should be sent when inventory falls below a threshold. Data synchronization must be performed seamlessly.",
+  "ground_truth_checklist": [
+    "Product SKU registration with name, category, and unit price",
+    "Stock quantity adjustment API for receiving shipments",
+    "Stock quantity reduction API for dispatching orders",
+    "Configurable minimum threshold limit per SKU",
+    "Automated low-stock alert event generation",
+    "Inventory audit trail logging timestamped stock adjustments",
+    "Warehouse bin location assignment tracking",
+    "Negative stock quantity prevention logic",
+    "Bulk stock import via CSV upload",
+    "Inventory valuation report summary generation",
+    "User role permissions (warehouse staff vs manager)",
+    "Concurrent stock modification lock handling"
+  ]
+}

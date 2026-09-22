@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_07_expense_splitter",
+  "title": "Group Expense Splitter",
+  "domain": "Finance / Personal Utilities",
+  "raw_text": "The system shall record shared expenses among group members. Balances must be calculated accurately to show who owes whom. Settlements should be logged seamlessly when paid. Financial precision shall be maintained.",
+  "ground_truth_checklist": [
+    "Group creation and member registration endpoint",
+    "Expense entry creation with description, total amount, and payer ID",
+    "Split calculation supporting equal splits among members",
+    "Unequal split calculation by exact amount or percentage",
+    "Net balance calculation for each group member",
+    "Simplified debt settlement algorithm minimizing transfers",
+    "Payment recording endpoint marking debts as settled",
+    "Currency format handling using fixed decimal precision",
+    "Expense activity feed detailing group history",
+    "Itemized receipt breakdown per expense",
+    "Negative amount validation prevention",
+    "Exportable expense balance summary report"
+  ]
+}

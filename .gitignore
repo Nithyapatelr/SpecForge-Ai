@@ -59,6 +59,10 @@ desktop.ini
 *.log
 logs/
 
+# Temporary scratch directory
+scratch/
+
 # Distribution
 *.tar.gz
 *.zip
+

@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_01_todo_api",
+  "title": "To-Do List REST API Service",
+  "domain": "Web Services / REST API",
+  "raw_text": "The system shall provide a REST API for managing to-do items. Users must be able to create, read, update, and delete tasks. Tasks should be stored efficiently in a database. The API must respond quickly under peak workload. Input arguments shall be validated gracefully without system failure.",
+  "ground_truth_checklist": [
+    "REST API endpoint for creating a new to-do task",
+    "REST API endpoint for retrieving task items",
+    "REST API endpoint for updating existing task details",
+    "REST API endpoint for deleting a task by ID",
+    "Task data model containing title, status, and due date",
+    "Database persistence layer for task records",
+    "Input validation returning 400 Bad Request on invalid payloads",
+    "Error handling returning standard JSON error schema",
+    "Task completion status toggling (pending/completed)",
+    "Timestamp fields for created_at and updated_at",
+    "Pagination support for task listing endpoint",
+    "Response latency benchmark under 200ms"
+  ]
+}

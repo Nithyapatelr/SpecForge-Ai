@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_12_weather_dashboard",
+  "title": "Weather Forecast Aggregator",
+  "domain": "Web Utilities / API Aggregation",
+  "raw_text": "The system shall aggregate weather forecasts from multiple external APIs. Location weather queries must return temperature, humidity, and wind conditions. Forecast data should be cached efficiently to minimize external API rate limits. API failure fallbacks shall operate smoothly.",
+  "ground_truth_checklist": [
+    "City or zip code weather search query endpoint",
+    "Integration with external weather data provider API",
+    "Data normalization mapping provider responses to unified schema",
+    "Response caching layer (in-memory or Redis) with configurable TTL",
+    "Fallback provider handling if primary weather API is unreachable",
+    "Current weather metrics return (temperature, humidity, wind, pressure)",
+    "5-day forecast data endpoint with daily high/low temperatures",
+    "Severe weather alert parsing and notification flag",
+    "Temperature unit conversion (Celsius to Fahrenheit)",
+    "API rate limit tracking and throttle management",
+    "Geocoding lookup converting city name to latitude/longitude",
+    "Cache hit/miss metric logging"
+  ]
+}

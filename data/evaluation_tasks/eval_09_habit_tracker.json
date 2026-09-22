@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_09_habit_tracker",
+  "title": "Habit Tracker & Streak Analytics",
+  "domain": "Health / Self-Improvement",
+  "raw_text": "The system shall track daily user habits and completion streaks. Habit check-ins must record the date and status. Streak counters should update accurately without resetting erroneously. Analytics visualizations shall display habit consistency.",
+  "ground_truth_checklist": [
+    "Habit creation endpoint with title, frequency (daily/weekly), and goal",
+    "Daily check-in endpoint recording habit completion for target date",
+    "Current streak calculation counting consecutive completion days",
+    "Longest streak history tracking per habit",
+    "Missed day detection marking habits as incomplete",
+    "Completion rate percentage calculation over 30-day window",
+    "Habit reminder notification scheduling",
+    "Habit archiving and restoration capability",
+    "Notes and reflection entry logging per check-in",
+    "Calendar view API endpoint showing monthly check-in matrix",
+    "Duplicate check-in prevention for same date",
+    "Timezone-aware date boundary processing"
+  ]
+}

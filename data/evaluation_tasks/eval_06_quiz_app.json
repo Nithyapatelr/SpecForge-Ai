@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_06_quiz_app",
+  "title": "Interactive Quiz & Leaderboard Engine",
+  "domain": "Education / Gamification",
+  "raw_text": "The system shall present multiple-choice quiz questions to users. Answers must be scored immediately upon submission. Leaderboards should display high scores dynamically. Quiz content shall be managed effectively.",
+  "ground_truth_checklist": [
+    "Quiz creation endpoint with title, topic, and questions",
+    "Question model containing prompt, options, and correct answer key",
+    "Quiz session initiation and timer management",
+    "User answer submission endpoint with automated scoring",
+    "Leaderboard computation ranking users by score and completion time",
+    "User quiz history tracking and score archives",
+    "Randomized question order per quiz session",
+    "Score breakdown showing correct vs incorrect answers",
+    "Category filtering for available quizzes",
+    "Single-attempt enforcement per quiz session",
+    "Validation ensuring questions have at least two options",
+    "Exportable quiz performance summary"
+  ]
+}

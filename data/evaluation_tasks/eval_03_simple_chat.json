@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_03_simple_chat",
+  "title": "Real-Time WebSocket Chat Application",
+  "domain": "Networking / Real-Time Messaging",
+  "raw_text": "The system shall provide real-time chat room messaging using WebSockets. Messages must be delivered instantly to all connected users. User connections should be handled robustly without dropping packets. Chat history shall be logged appropriately.",
+  "ground_truth_checklist": [
+    "WebSocket endpoint for real-time bi-directional messaging",
+    "Chat room joining and leaving event handling",
+    "Broadcast mechanism delivering messages to active channel members",
+    "User nickname assignment and duplicate handling",
+    "Persistent chat message history storage in database",
+    "Heartbeat mechanism for detecting disconnected clients",
+    "Message payload schema containing sender, text, and timestamp",
+    "Input sanitization to prevent XSS injection in chat text",
+    "Connection rate limiting per IP address",
+    "Graceful handling of server disconnects and reconnects",
+    "Unread message indicator tracking",
+    "Maximum message length validation"
+  ]
+}

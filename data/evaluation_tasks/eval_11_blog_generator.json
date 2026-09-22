@@ -1,0 +1,20 @@
+{
+  "task_id": "eval_11_blog_generator",
+  "title": "Static Markdown Site Generator",
+  "domain": "Developer Tools / Publishing",
+  "raw_text": "The system shall compile Markdown files into a static HTML blog. Articles must be parsed with frontmatter metadata tags. Site build speed should be optimal for large content repositories. HTML output shall follow structured templates.",
+  "ground_truth_checklist": [
+    "Markdown file scanner reading input content directory",
+    "YAML frontmatter parser extracting title, date, tags, and author",
+    "Markdown to HTML content rendering engine",
+    "HTML layout template engine injecting rendered body into page wrapper",
+    "Blog post index page generator with paginated article lists",
+    "Tag archive page generator grouping articles by tag",
+    "RSS feed XML generation containing recent posts",
+    "Static asset copying (CSS, JS, images) to output build folder",
+    "Incremental build option recompiling modified files only",
+    "Draft article filtering excluding posts marked draft=true",
+    "Syntax highlighting for code blocks in post content",
+    "Build log output reporting compiled pages and total time"
+  ]
+}

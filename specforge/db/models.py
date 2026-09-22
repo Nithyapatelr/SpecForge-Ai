@@ -184,6 +184,7 @@ class MASRuns(Base):
     __tablename__ = "mas_runs"
 
     run_id: str = Column(String, primary_key=True, default=_uuid)
+    batch_id: str = Column(String, nullable=True)
     source_doc_id: str = Column(String, nullable=True)
     framework_name: str = Column(String, nullable=False)
     annotated: bool = Column(Boolean, nullable=False, default=False)

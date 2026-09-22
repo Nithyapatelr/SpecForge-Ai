@@ -53,3 +53,23 @@ def test_mas_adapter_plumbing(tmp_path):
         assert run_row.annotated is False
         assert run_row.status == "completed"
         assert os.path.exists(run_row.raw_trace_path)
+
+
+def test_execute_mas_run_chatdev(tmp_path):
+    out_dir = str(tmp_path / "chatdev_run")
+    run_id = execute_mas_run(
+        source_doc_id="doc_chatdev",
+        task_description="Build calculator app",
+        framework_name="chatdev",
+        annotated=False,
+        output_dir=out_dir,
+    )
+
+    assert run_id is not None
+    with get_session() as session:
+        run_row = session.query(MASRuns).filter_by(run_id=run_id).first()
+        assert run_row is not None
+        assert run_row.framework_name == "chatdev"
+        assert run_row.status == "completed"
+        assert os.path.exists(run_row.raw_trace_path)
+

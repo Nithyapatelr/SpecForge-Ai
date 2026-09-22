@@ -76,11 +76,18 @@ def heuristic_ambiguity_score(text: str) -> dict:
     if found_qual and not has_numbers:
         smells.append(f"missing_measurable_value: {', '.join(found_qual)}")
 
+    # 4. Check un-anchored open conditionals / weak directives
+    open_conditionals = ["as far as possible", "where feasible", "to the extent possible", "etc.", "and so on", "under all conditions", "within seconds"]
+    found_open = [c for c in open_conditionals if c in text_lower]
+    if found_open:
+        smells.append(f"unanchored_conditional: {', '.join(found_open)}")
+
     # Compute score based on smells found (cap at 1.0)
-    # Each smell type adds 0.35 to the score
-    score = min(1.0, len(smells) * 0.35)
+    # Each smell type adds 0.50 to the score to ensure clear binary threshold flagging
+    score = min(1.0, len(smells) * 0.50)
 
     return {
         "ambiguity_score": round(score, 2),
         "smells": smells,
     }
+
